@@ -34,4 +34,8 @@ export class EmployeeTrainingService extends BaseApiService {
     return this.postAsync<EmployeeTraining>(`employeetraining/updateemployeetrainings`, employee);
   }
 
+  public getLastModifiedRecordData(): Observable<any> {
+    return this.getAsync<any>(`employeetraining/getlastmodifiedrecorddata`);
+  }
+
 }

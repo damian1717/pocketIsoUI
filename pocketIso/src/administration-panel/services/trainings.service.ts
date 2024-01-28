@@ -38,4 +38,8 @@ export class TrainingsService extends BaseApiService {
     return this.deleteAsync<Training>(`training/deletetraining/${id}`);
   }
 
+  public getLastModifiedRecordData(): Observable<any> {
+    return this.getAsync<any>(`training/getlastmodifiedrecorddata`);
+  }
+
 }

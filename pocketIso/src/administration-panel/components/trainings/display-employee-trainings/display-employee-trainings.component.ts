@@ -1,23 +1,22 @@
 import { Component } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatButtonToggleGroup, MatButtonToggleModule } from '@angular/material/button-toggle';
-import { MatTableModule } from '@angular/material/table';
+import { MatButtonToggleGroup } from '@angular/material/button-toggle';
 import { EmployeeTrainingService } from '../../../../administration-panel/services/employee-training.service';
+import { TrainingsService } from '../../../../administration-panel/services/trainings.service';
 
 'use strict'
 @Component({
   selector: 'app-display-employee-trainings',
   templateUrl: './display-employee-trainings.component.html',
-  styleUrls: ['./display-employee-trainings.component.css'],
-  standalone: true,
-  imports: [MatButtonModule, MatButtonToggleModule, MatTableModule],
+  styleUrls: ['./display-employee-trainings.component.css']
 })
 export class DisplayEmployeeTrainingsComponent {
   displayedColumns: string[] = [];
   dataSource: object[] = [];
   displayedColumnsWithDisplayName: ColumnInfo[] = [];
   tables = [0];
-  constructor(private employeeTrainingService: EmployeeTrainingService) {
+  modifiedData: any;
+  trainingModifiedData: any;
+  constructor(private employeeTrainingService: EmployeeTrainingService, private trainingsService: TrainingsService) {
 
     this.employeeTrainingService.getAllEmployeeTrainings()
       .subscribe(x => {
@@ -52,7 +51,7 @@ export class DisplayEmployeeTrainingsComponent {
                   };
                 });
               }
-              
+
               this.dataSource.push(obj1 as object);
 
             });
@@ -60,7 +59,25 @@ export class DisplayEmployeeTrainingsComponent {
             console.log(this.dataSource);
           }
         }
-      })
+      });
+
+    this.getLastModifiedData();
+  }
+
+  private getLastModifiedData() {
+    this.employeeTrainingService.getLastModifiedRecordData()
+      .subscribe(x => {
+        if (x) {
+          this.modifiedData = x;
+        }
+      });
+
+    this.trainingsService.getLastModifiedRecordData()
+      .subscribe(x => {
+        if (x) {
+          this.trainingModifiedData = x;
+        }
+      });
   }
 
   isSticky(buttonToggleGroup: MatButtonToggleGroup, id: string) {

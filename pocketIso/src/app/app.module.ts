@@ -43,6 +43,7 @@ import { ChangePasswordDialogComponent } from '../common/auth/change-password-di
 import { DisplayQualityPoliciesComponent } from '../users-panel/display-quality-policies/display-quality-policies.component';
 import { CommonModule } from '@angular/common';
 import { ConfirmationDialogComponent } from '../common/components/confirmation-dialog/confirmation-dialog.component';
+import { DisplayEmployeeTrainingsComponent } from '../administration-panel/components/trainings/display-employee-trainings/display-employee-trainings.component';
 
 @NgModule({
   declarations: [
@@ -80,7 +81,8 @@ import { ConfirmationDialogComponent } from '../common/components/confirmation-d
     ProcessesComponent,
     ChangePasswordDialogComponent,
     DisplayQualityPoliciesComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    DisplayEmployeeTrainingsComponent
   ],
   imports: [
     BrowserModule,
