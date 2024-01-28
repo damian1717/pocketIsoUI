@@ -1,0 +1,41 @@
+<div class="main-page">
+  <div class="auth-spinner" *ngIf="isLoading">
+    <mat-spinner></mat-spinner>
+  </div>
+  <div class="login-form">
+    <form class="content" [formGroup]="loginForm" fxLayout="column" *ngIf="!isLoading">
+      <div fxLayout="row wrap" fxLayoutGap="20px grid" fxLayoutAlign="start start">
+
+        <div fxLayout="column" fxFlex.gt-sm="100%" fxFlex.sm="100%" fxFlex.xs="100%" fxFlexOrder="1" fxFlexOrder.sm="1"
+          fxFlexOrder.xs="1">
+          <mat-form-field appearance="fill" tabindex="1">
+            <mat-label for="name">Email</mat-label>
+            <input matInput id="email" type="email" formControlName="email" [email]="true">
+            <mat-error *ngIf="(emailValue?.errors || null)?.['required']">
+              Email jest wymagany.
+            </mat-error>
+            <mat-error *ngIf="(emailValue?.errors || null)?.['email']">
+              Email jest nieprawidłowy.
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="column" fxFlex.gt-sm="100%" fxFlex.sm="100%" fxFlex.xs="100%" fxFlexOrder="2" fxFlexOrder.sm="2"
+          fxFlexOrder.xs="2">
+          <mat-form-field appearance="fill" tabindex="2">
+            <mat-label for="name">Hasło</mat-label>
+            <input matInput id="password" type="password" formControlName="password">
+            <mat-error *ngIf="(passwordValue?.errors || null)?.['required']">
+              Hasło jest wymagane.
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div fxLayout="column" fxFlex.gt-sm="100%" fxFlex.sm="100%" fxFlex.xs="100%" fxFlexOrder="3" fxFlexOrder.sm="3"
+          fxFlexOrder.xs="3">
+          <div class="log-in-btn" (click)="onSubmit()"><img src="/assets/img/loginbtn.PNG"/></div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>

@@ -1,0 +1,56 @@
+<div class="main-content">
+  <p class="header-name">Szkolenie</p>
+
+  <form [formGroup]="trainingForm" fxLayout="column" (ngSubmit)="onSubmit()">
+    <div fxLayout="column" fxLayoutGap="20px grid" fxLayoutAlign="center center">
+
+      <input hidden matInput id="id" type="text" formControlName="id">
+
+      <div fxLayout="column" fxFlex.gt-sm="100%" fxFlex.sm="100%" fxFlex.xs="100%" fxFlexOrder="1" fxFlexOrder.sm="1"
+        fxFlexOrder.xs="1">
+        <mat-form-field appearance="fill" tabindex="1">
+          <mat-label for="name">Nazwa</mat-label>
+          <input matInput id="name" type="text" formControlName="name">
+          <mat-error *ngIf="(nameValue?.errors || null)?.['required']">
+            Nazwa jest wymagana.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="column" fxFlex.gt-sm="100%" fxFlex.sm="100%" fxFlex.xs="100%" fxFlexOrder="2" fxFlexOrder.sm="2"
+        fxFlexOrder.xs="2">
+        <mat-form-field appearance="fill" tabindex="2">
+          <mat-label for="forHowManyMonths">Częstotliwość szkolenia (Co ile miesięcy)</mat-label>
+          <mat-select formControlName="forHowManyMonths" name="forHowManyMonths">
+            <mat-option *ngFor="let month of months" [value]="month">
+              {{month}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="(forHowManyMonthsValue?.errors || null)?.['required']">
+            Częstotliwość szkolenia jest wymagana.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="column" fxFlex.gt-sm="100%" fxFlex.sm="100%" fxFlex.xs="100%" fxFlexOrder="3" fxFlexOrder.sm="3"
+        fxFlexOrder.xs="3">
+        <mat-form-field appearance="fill" tabindex="3">
+          <mat-label for="level">Przypisz szkolenie do stanowiska</mat-label>
+          <mat-select formControlName="level" name="level">
+            <mat-option *ngFor="let level of levels" [value]="level">
+              {{level}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="(levelValue?.errors || null)?.['required']">
+            Przypisanie szkolenie do stanowiska jest wymagana.
+          </mat-error>
+          <mat-error *ngIf="levelValue?.hasError('notDefineLevels')">
+            Brak zdefiniowanych leveli w schemacie organizacji.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+    </div>
+    <button mat-raised-button color="primary" type="submit" class="regulation">Zapisz</button>
+  </form>
+</div>

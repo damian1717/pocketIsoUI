@@ -1,0 +1,65 @@
+<div class="flex-container">
+  <div>x</div>
+  <div>Kwalifikacje nie wymagane</div>
+</div>
+
+<div class="flex-container">
+  <div class="div-first training_level_basic"></div>
+  <div>Wiedza podstawowa</div>
+</div>
+
+<div class="flex-container">
+  <div class="div-first training_level_pre_intermidiate"></div>
+  <div>Średnio-zaawansowany</div>
+</div>
+
+<div class="flex-container">
+  <div class="div-first training_level_intermidiate"></div>
+  <div>Zaawansowany</div>
+</div>
+
+<div class="flex-container" style="padding-bottom: 40px;">
+  <div class="div-first training_level_expert"></div>
+  <div>Expert</div>
+</div>
+
+<section class="example-container mat-elevation-z8" tabindex="0">
+  @for (table of tables; track table) {
+  <mat-table [dataSource]="dataSource">
+
+    @for (column of displayedColumnsWithDisplayName; track column) {
+
+    @if(column.name === 'position') {
+    <ng-container [matColumnDef]="column.name" [sticky]="true">
+      <mat-header-cell class="base-cell-position" *matHeaderCellDef> {{column.displayName}} </mat-header-cell>
+      <mat-cell class="base-cell-position" *matCellDef="let element"> {{element[column.name]}} </mat-cell>
+    </ng-container>
+    }
+
+    @if(column.name === 'trainingName') {
+    <ng-container [matColumnDef]="column.name" [sticky]="true">
+      <mat-header-cell class="base-cell" *matHeaderCellDef> {{column.displayName}} </mat-header-cell>
+      <mat-cell class="base-cell" *matCellDef="let element"> {{element[column.name]}} </mat-cell>
+    </ng-container>
+    }
+
+    @if(column.name !== 'position' && column.name !=='trainingName') {
+    <ng-container [matColumnDef]="column.name">
+      <mat-header-cell class="base-cell" *matHeaderCellDef> {{column.displayName}} </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <div class="base-cell tooltip {{element[column.name].classOfDisplayTrainingDate}} {{element[column.name].classOfDisplayTrainingLevel}}">
+          {{element[column.name].trainingDate}}
+          <!--
+          <span class="tooltiptext">test test1</span>
+          -->
+        </div>
+      </mat-cell>
+    </ng-container>
+    }
+    }
+    <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  }
+</section>

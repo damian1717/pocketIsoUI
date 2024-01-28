@@ -1,0 +1,46 @@
+<div class="main-content">
+  <p class="header-name">Informacje o szkoleniu: {{ trainingName }}</p>
+
+  <form [formGroup]="employeeTrainingForm" fxLayout="column" (ngSubmit)="onSubmit()">
+
+    <div fxLayout="row wrap" fxLayoutGap="20px grid" fxLayoutAlign="start start">
+
+      <input hidden matInput id="id" type="text" formControlName="id">
+      <input hidden matInput id="trainingId" type="text" formControlName="trainingId">
+      <input hidden matInput id="employeeId" type="text" formControlName="employeeId">
+
+      <div fxLayout="column" fxFlex.gt-sm="100%" fxFlex.sm="100%" fxFlex.xs="100%" fxFlexOrder="1" fxFlexOrder.sm="1"
+        fxFlexOrder.xs="1">
+        <mat-checkbox color="primary" matInput id="required" formControlName="required">Wymagane</mat-checkbox>
+      </div>
+
+      <div fxLayout="column" fxFlex.gt-sm="100%" fxFlex.sm="100%" fxFlex.xs="100%" fxFlexOrder="2" fxFlexOrder.sm="2"
+        fxFlexOrder.xs="2">
+        <mat-form-field appearance="fill">
+          <mat-label>Data szkolenia</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="trainingDate">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="column" fxFlex.gt-sm="100%" fxFlex.sm="100%" fxFlex.xs="100%" fxFlexOrder="3" fxFlexOrder.sm="3"
+        fxFlexOrder.xs="3">
+        <mat-form-field appearance="fill">
+          <mat-label>Poziom umiejętności</mat-label>
+          <mat-select id="skillLevel" type="text" formControlName="skillLevel" name="skillLevel">
+            <mat-option *ngFor="let level of skillLevels" [value]="level.value">
+              {{level.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+    </div>
+    <div style="justify-content: center;">
+      <button mat-raised-button (click)="cancel()" type="button" style="margin-right: 10px;">Anuluj</button>
+      <button mat-raised-button color="primary" type="submit">Zapisz</button>
+    </div>
+
+  </form>
+</div>

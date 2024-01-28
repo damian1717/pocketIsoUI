@@ -1,0 +1,46 @@
+<div class="nav-container" [class.example-is-mobile]="mobileQuery.matches">
+  <mat-toolbar color="primary" class="nav-toolbar">
+    <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+    <h1 class="nav-app-name">POCKETISO</h1>
+    <button *ngIf="isAuthenticated" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" class="menu-class">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="openUserInfo()">
+        <mat-icon>info</mat-icon>
+        <span>Informacje o użytkowniku</span>
+      </button>
+      <button mat-menu-item (click)="changePassword()">
+        <mat-icon>lock_reset</mat-icon>
+        <span>Zmień hasło</span>
+      </button>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Wyloguj</span>
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="nav-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
+      fixedTopGap="56">
+      <mat-nav-list *ngFor="let item of fillerNav">
+        <a class="nav-item" *ngIf="!item.children" mat-list-item routerLink="{{item.url}}">{{item.name}}</a>
+        <mat-expansion-panel *ngIf="item.children" [class.mat-elevation-z0]="true">
+          <mat-expansion-panel-header>
+            {{item.name}}
+          </mat-expansion-panel-header>
+          <mat-nav-list>
+            <a mat-list-item routerLink="{{itemChild.url}}" *ngFor="let itemChild of item.children">
+              {{ itemChild.name }}
+            </a>
+          </mat-nav-list>
+        </mat-expansion-panel>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="side-nav-content">
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

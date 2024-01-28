@@ -1,0 +1,33 @@
+<div class="main-content">
+
+    <p class="header-name">POLITYKA JAKOŚCI</p>
+
+    <div class="flex-container">
+        <div class="div-section">
+            <div>ZEWNĘTRZNE</div>
+            <div *ngFor="let item of qualityPoliciesExternal">
+                <p><mat-checkbox color="primary" [(ngModel)]="item.selected">{{ item.name }}</mat-checkbox></p>
+            </div>
+        </div>
+        <div class="div-section">
+            <div>WEWNĘTRZNE</div>
+            <div *ngFor="let item of qualityPoliciesInternal">
+                <p><mat-checkbox color="primary" [(ngModel)]="item.selected">{{ item.name }}</mat-checkbox></p>
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align: center;">
+        <button mat-raised-button color="primary" (click)="generateRaportPdf()">Zapisz</button>
+    </div>
+</div>
+
+<div *ngIf="documents && documents.length > 0" style="margin: auto; width: 50%; padding-top: 70px;">
+    <p>Lista utworzonych dokumentów:</p>
+    <mat-list>
+        <mat-list-item *ngFor="let document of documents">
+            <div matListItemTitle style="padding-right: 20px;">{{document.name}}</div>
+            <mat-icon matListItemIcon (click)="downloadDocumnet(document.id)">download</mat-icon>
+        </mat-list-item>
+    </mat-list>
+</div>

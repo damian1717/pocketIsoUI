@@ -1,0 +1,65 @@
+<div style="text-align: center;">
+  <h1 mat-dialog-title>Informacje o stanowisku</h1>
+  <div mat-dialog-content>
+    <form class="content" [formGroup]="chartForm" fxLayout="column" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="fill">
+        <mat-label>Imie</mat-label>
+        <input matInput id="name" type="text" formControlName="name">
+        <mat-error *ngIf="(nameValue?.errors || null)?.['required']">
+          Imie jest wymagane.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Nazwisko</mat-label>
+        <input matInput id="lastName" type="text" formControlName="lastName">
+        <mat-error *ngIf="(lastNameValue?.errors || null)?.['required']">
+          Nazwisko jest wymagane.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input email matInput id="email" type="email" formControlName="email" [email]="true">
+        <mat-error *ngIf="(emailValue?.errors || null)?.['required']">
+          Email jest wymagany.
+        </mat-error>
+        <mat-error *ngIf="(emailValue?.errors || null)?.['email']">
+          Email jest nieprawidłowy.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Zawód</mat-label>
+        <input matInput id="position" type="text" formControlName="position">
+        <mat-error *ngIf="(positionValue?.errors || null)?.['required']">
+          Zawód jest wymagany.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="showBelowHowColumn" appearance="fill">
+        <mat-label>Osoba poniżej</mat-label>
+        <mat-select id="belowPersonId" type="text" formControlName="belowPersonId"
+          (selectionChange)="onChangeBelowPerson($event)">
+          <mat-option *ngFor="let person of personsBelow" [value]="person.id">
+            {{ person.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="showLevelColumn" appearance="fill">
+        <mat-label>Poziom w schemacie</mat-label>
+        <mat-select id="level" type="text" formControlName="level">
+          <mat-option *ngFor="let level of availableLevels" [value]="level">
+            {{ level }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div mat-dialog-actions style="justify-content: center;">
+        <button mat-button (click)="onNoClick()">Anuluj</button>
+        <button mat-button type="submit">Zapisz</button>
+      </div>
+    </form>
+  </div>
+</div>

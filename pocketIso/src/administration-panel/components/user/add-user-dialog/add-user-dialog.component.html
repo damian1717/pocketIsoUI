@@ -1,0 +1,36 @@
+<div style="text-align: center;">
+  <h1 mat-dialog-title>Informacje o stanowisku</h1>
+  <div mat-dialog-content>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Imie</mat-label>
+      <input matInput [(ngModel)]="userInfo.firstName">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Nazwisko</mat-label>
+      <input matInput [(ngModel)]="userInfo.lastName">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput [(ngModel)]="userInfo.email">
+    </mat-form-field>
+
+    <mat-form-field *ngIf="showPasswordColumn" appearance="fill">
+      <mat-label>Hasło</mat-label>
+      <input matInput type="password" [(ngModel)]="userInfo.password">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Rola</mat-label>
+      <input matInput [(ngModel)]="userInfo.role">
+    </mat-form-field>
+
+
+    <div mat-dialog-actions style="justify-content: center;">
+      <button mat-button (click)="onNoClick()">Anuluj</button>
+      <button mat-button [mat-dialog-close]="userInfo" cdkFocusInitial>Zapisz</button>
+    </div>
+  </div>
+</div>

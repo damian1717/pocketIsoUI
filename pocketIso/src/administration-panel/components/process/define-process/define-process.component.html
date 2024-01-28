@@ -1,0 +1,316 @@
+<mat-accordion>
+  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Dane wejściowe: (elementy potrzebne do rozpoczęcia procesu) [A]
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="demo-button-container">
+      <button mat-raised-button (click)="addInputData()" class="demo-button">
+        Dodaj
+      </button>
+    </div>
+    <table mat-table [dataSource]="inputDataDataSource" class="mat-elevation-z8 demo-table">
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Nazwa</th>
+        <td mat-cell *matCellDef="let element">{{element.name}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="basic">
+        <th mat-header-cell *matHeaderCellDef>Podstawowy</th>
+        <td mat-cell *matCellDef="let element">
+          <span *ngIf="element.isBase">Tak</span>
+          <span *ngIf="!element.isBase">Nie</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef>Edytuj</th>
+        <td mat-cell *matCellDef="let element"><button *ngIf="!element.isBase" mat-raised-button color="primary"
+            (click)="editInputData(element.id)">Edycja</button></td>
+      </ng-container>
+
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef>Usuń</th>
+        <td mat-cell *matCellDef="let element"><button *ngIf="!element.isBase" mat-raised-button color="primary"
+            (click)="delete(element.id)">Usuń</button></td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Dane wyjściowe: (elementy, otrzymane po zakończonym procesie) [B]
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="demo-button-container">
+      <button mat-raised-button (click)="addOutputData()" class="demo-button">
+        Dodaj
+      </button>
+    </div>
+    <table mat-table [dataSource]="outputDataDataSource" class="mat-elevation-z8 demo-table">
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Nazwa</th>
+        <td mat-cell *matCellDef="let element">{{element.name}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="basic">
+        <th mat-header-cell *matHeaderCellDef>Podstawowy</th>
+        <td mat-cell *matCellDef="let element">
+          <span *ngIf="element.isBase">Tak</span>
+          <span *ngIf="!element.isBase">Nie</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef>Edytuj</th>
+        <td mat-cell *matCellDef="let element"><button *ngIf="!element.isBase" mat-raised-button color="primary"
+            (click)="editOutputData(element.id)">Edycja</button></td>
+      </ng-container>
+
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef>Usuń</th>
+        <td mat-cell *matCellDef="let element"><button *ngIf="!element.isBase" mat-raised-button color="primary"
+            (click)="delete(element.id)">Usuń</button></td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Mierniki: (istotna wartość mierzona dla danego procesu) [C]
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="demo-button-container">
+      <button mat-raised-button (click)="addMeasuredValuesData()" class="demo-button">
+        Dodaj
+      </button>
+    </div>
+    <table mat-table [dataSource]="measuredValuesDataSource" class="mat-elevation-z8 demo-table">
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Nazwa</th>
+        <td mat-cell *matCellDef="let element">{{element.name}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="basic">
+        <th mat-header-cell *matHeaderCellDef>Podstawowy</th>
+        <td mat-cell *matCellDef="let element">
+          <span *ngIf="element.isBase">Tak</span>
+          <span *ngIf="!element.isBase">Nie</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef>Edytuj</th>
+        <td mat-cell *matCellDef="let element"><button *ngIf="!element.isBase" mat-raised-button color="primary"
+            (click)="editMeasuredValuesData(element.id)">Edycja</button></td>
+      </ng-container>
+
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef>Usuń</th>
+        <td mat-cell *matCellDef="let element"><button *ngIf="!element.isBase" mat-raised-button color="primary"
+            (click)="delete(element.id)">Usuń</button></td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Co? Materiały, wyposażenie (elementy konieczne do wykonania procesu) [D]
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="demo-button-container">
+      <button mat-raised-button (click)="addMaterialData()" class="demo-button">
+        Dodaj
+      </button>
+    </div>
+    <table mat-table [dataSource]="materialDataSource" class="mat-elevation-z8 demo-table">
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Nazwa</th>
+        <td mat-cell *matCellDef="let element">{{element.name}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="basic">
+        <th mat-header-cell *matHeaderCellDef>Podstawowy</th>
+        <td mat-cell *matCellDef="let element">
+          <span *ngIf="element.isBase">Tak</span>
+          <span *ngIf="!element.isBase">Nie</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef>Edytuj</th>
+        <td mat-cell *matCellDef="let element"><button *ngIf="!element.isBase" mat-raised-button color="primary"
+            (click)="editMaterialData(element.id)">Edycja</button></td>
+      </ng-container>
+
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef>Usuń</th>
+        <td mat-cell *matCellDef="let element"><button *ngIf="!element.isBase" mat-raised-button color="primary"
+            (click)="delete(element.id)">Usuń</button></td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Kto? Wiedza, kompetencje, szkolenia (zasoby ludzkie konieczne w danym) [E]
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="demo-button-container">
+      <button mat-raised-button (click)="addResourceData()" class="demo-button">
+        Dodaj
+      </button>
+    </div>
+    <table mat-table [dataSource]="resourcesDataSource" class="mat-elevation-z8 demo-table">
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Nazwa</th>
+        <td mat-cell *matCellDef="let element">{{element.name}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="basic">
+        <th mat-header-cell *matHeaderCellDef>Podstawowy</th>
+        <td mat-cell *matCellDef="let element">
+          <span *ngIf="element.isBase">Tak</span>
+          <span *ngIf="!element.isBase">Nie</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef>Edytuj</th>
+        <td mat-cell *matCellDef="let element"><button *ngIf="!element.isBase" mat-raised-button color="primary"
+            (click)="editResourceData(element.id)">Edycja</button></td>
+      </ng-container>
+
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef>Usuń</th>
+        <td mat-cell *matCellDef="let element"><button *ngIf="!element.isBase" mat-raised-button color="primary"
+            (click)="delete(element.id)">Usuń</button></td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Jak? Dokumentacja, procedury, metody (dokumenty niezbędne do realizacji procesu) [F]
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="demo-button-container">
+      <button mat-raised-button (click)="addDocumentsData()" class="demo-button">
+        Dodaj
+      </button>
+    </div>
+    <table mat-table [dataSource]="documentsDataSource" class="mat-elevation-z8 demo-table">
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Nazwa</th>
+        <td mat-cell *matCellDef="let element">{{element.name}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="basic">
+        <th mat-header-cell *matHeaderCellDef>Podstawowy</th>
+        <td mat-cell *matCellDef="let element">
+          <span *ngIf="element.isBase">Tak</span>
+          <span *ngIf="!element.isBase">Nie</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef>Edytuj</th>
+        <td mat-cell *matCellDef="let element"><button *ngIf="!element.isBase" mat-raised-button color="primary"
+            (click)="editDocumentsData(element.id)">Edycja</button></td>
+      </ng-container>
+
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef>Usuń</th>
+        <td mat-cell *matCellDef="let element"><button *ngIf="!element.isBase" mat-raised-button color="primary"
+            (click)="delete(element.id)">Usuń</button></td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Cel procesu (okno do uzupełnienia ) [G]
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="demo-button-container">
+      <button mat-raised-button (click)="addItemsData()" class="demo-button">
+        Dodaj
+      </button>
+    </div>
+    <table mat-table [dataSource]="itemsDataSource" class="mat-elevation-z8 demo-table">
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Nazwa</th>
+        <td mat-cell *matCellDef="let element">{{element.name}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="basic">
+        <th mat-header-cell *matHeaderCellDef>Podstawowy</th>
+        <td mat-cell *matCellDef="let element">
+          <span *ngIf="element.isBase">Tak</span>
+          <span *ngIf="!element.isBase">Nie</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef>Edytuj</th>
+        <td mat-cell *matCellDef="let element"><button *ngIf="!element.isBase" mat-raised-button color="primary"
+            (click)="editItemsData(element.id)">Edycja</button></td>
+      </ng-container>
+
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef>Usuń</th>
+        <td mat-cell *matCellDef="let element"><button *ngIf="!element.isBase" mat-raised-button color="primary"
+            (click)="delete(element.id)">Usuń</button></td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-expansion-panel>
+</mat-accordion>
+
+<div style="text-align: center; padding-top: 100px;">
+  <button mat-raised-button color="primary" (click)="generateRaportPdf()">Zapisz</button>
+</div>
+
+<div *ngIf="documents && documents.length > 0" style="margin: auto; width: 50%; padding-top: 100px;">
+  <p>Lista utworzonych dokumentów:</p>
+  <mat-list>
+    <mat-list-item *ngFor="let document of documents">
+      <div matListItemTitle style="padding-right: 20px;">{{document.name}}</div>
+      <mat-icon matListItemIcon (click)="downloadDocumnet(document.id)">download</mat-icon>
+    </mat-list-item>
+  </mat-list>
+</div>

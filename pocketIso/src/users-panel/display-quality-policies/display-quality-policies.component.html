@@ -1,0 +1,27 @@
+<div class="main-content">
+
+  <p class="header-name">POLITYKA JAKOŚCI</p>
+
+  <div class="flex-container">
+    <div class="div-section">
+      <div>ZEWNĘTRZNE</div>
+      <div *ngFor="let item of externalQualityPolicies">
+        <p>{{ item.name }}</p>
+      </div>
+    </div>
+    <div class="div-section">
+      <div>WEWNĘTRZNE</div>
+      <div *ngFor="let item of internalQualityPolicies">
+        <p>{{ item.name }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="document" style="margin: auto; width: 50%; padding-top: 100px;">
+  <p>Raport Polityka jakości:</p>
+  <div>
+    <div style="padding-right: 20px;">{{document.name}} <mat-icon
+        (click)="downloadDocumnet(document.id)">download</mat-icon></div>
+  </div>
+</div>

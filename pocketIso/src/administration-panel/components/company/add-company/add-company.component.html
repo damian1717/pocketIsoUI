@@ -1,0 +1,159 @@
+<div class="main-content">
+  <p class="header-name">Dane Organizacji</p>
+
+  <form [formGroup]="companyForm" #formDirective="ngForm" fxLayout="column" (ngSubmit)="onSubmit(formDirective)">
+    <div fxLayout="row wrap" fxLayoutGap="20px grid" fxLayoutAlign="start start">
+
+      <input hidden matInput id="id" type="text" formControlName="id">
+
+      <div fxLayout="column" fxFlex.gt-sm="33%" fxFlex.sm="50%" fxFlex.xs="100%" fxFlexOrder="1" fxFlexOrder.sm="1"
+        fxFlexOrder.xs="1">
+        <mat-form-field appearance="fill" tabindex="1">
+          <mat-label for="name">Nazwa</mat-label>
+          <input matInput id="name" type="text" formControlName="name">
+          <mat-error *ngIf="(nameValue?.errors || null)?.['required']">
+            Nazwa jest wymagana.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="column" fxFlex.gt-sm="33%" fxFlex.sm="50%" fxFlex.xs="100%" fxFlexOrder="2" fxFlexOrder.sm="2"
+        fxFlexOrder.xs="2">
+        <mat-form-field appearance="fill" tabindex="2">
+          <mat-label for="director">Kod firmy</mat-label>
+          <input matInput id="code" type="text" formControlName="code" maxlength="4" [readonly]="codeDisabled">
+          <mat-error *ngIf="(codeValue?.errors || null)?.['required']">
+            Kod firmy jest wymagany.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="column" fxFlex.gt-sm="33%" fxFlex.sm="50%" fxFlex.xs="100%" fxFlexOrder="3" fxFlexOrder.sm="3"
+        fxFlexOrder.xs="3">
+        <mat-form-field appearance="fill" tabindex="3">
+          <mat-label for="director">Właściciel / Dyrektor (Imię i Nazwisko)</mat-label>
+          <input matInput id="director" type="text" formControlName="director">
+          <mat-error *ngIf="(directorValue?.errors || null)?.['required']">
+            Właściciel / Dyrektor jest wymagany.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="column" fxFlex.gt-sm="33%" fxFlex.sm="50%" fxFlex.xs="100%" fxFlexOrder="4" fxFlexOrder.sm="4"
+        fxFlexOrder.xs="4">
+        <mat-form-field appearance="fill" tabindex="4">
+          <mat-label for="nip">NIP</mat-label>
+          <input matInput id="nip" type="text" formControlName="nip">
+          <mat-error *ngIf="(nipValue?.errors || null)?.['required']">
+            Nip jest wymagany.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="column" fxFlex.gt-sm="33%" fxFlex.sm="50%" fxFlex.xs="100%" fxFlexOrder="5" fxFlexOrder.sm="5"
+        fxFlexOrder.xs="5">
+        <mat-form-field appearance="fill" tabindex="5">
+          <mat-label for="city">Adres Miejscowość</mat-label>
+          <input matInput id="city" type="text" formControlName="city">
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="column" fxFlex.gt-sm="33%" fxFlex.sm="50%" fxFlex.xs="100%" fxFlexOrder="6" fxFlexOrder.sm="6"
+        fxFlexOrder.xs="6">
+        <mat-form-field appearance="fill" tabindex="6">
+          <mat-label for="postalCode">Kod pocztowy</mat-label>
+          <input matInput id="postalCode" type="text" formControlName="postalCode">
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="column" fxFlex.gt-sm="33%" fxFlex.sm="50%" fxFlex.xs="100%" fxFlexOrder="7" fxFlexOrder.sm="7"
+        fxFlexOrder.xs="7">
+        <mat-form-field appearance="fill" tabindex="7">
+          <mat-label for="street">Ulica</mat-label>
+          <input matInput id="street" type="text" formControlName="street">
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="column" fxFlex.gt-sm="33%" fxFlex.sm="50%" fxFlex.xs="100%" fxFlexOrder="8" fxFlexOrder.sm="8"
+        fxFlexOrder.xs="8">
+        <mat-form-field appearance="fill" tabindex="8">
+          <mat-label for="numberBuilding">Numer budynku</mat-label>
+          <input matInput id="numberBuilding" type="text" formControlName="numberBuilding">
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="column" fxFlex.gt-sm="33%" fxFlex.sm="50%" fxFlex.xs="100%" fxFlexOrder="9" fxFlexOrder.sm="9"
+        fxFlexOrder.xs="9">
+        <mat-form-field appearance="fill" tabindex="9">
+          <mat-label for="numberApartment">Numer lokalu</mat-label>
+          <input matInput id="numberApartment" type="text" formControlName="numberApartment">
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="column" fxFlex.gt-sm="33%" fxFlex.sm="50%" fxFlex.xs="100%" fxFlexOrder="10" fxFlexOrder.sm="10"
+        fxFlexOrder.xs="10">
+        <mat-form-field appearance="fill" tabindex="10">
+          <mat-label for="knowHow">Know-how</mat-label>
+          <input matInput id="knowHow" type="text" formControlName="knowHow">
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="column" fxFlex.gt-sm="33%" fxFlex.sm="50%" fxFlex.xs="100%" fxFlexOrder="11" fxFlexOrder.sm="11"
+        fxFlexOrder.xs="11">
+        <mat-form-field appearance="fill" tabindex="11">
+          <mat-label for="itemsCompany">Cel i strategię działania firmy</mat-label>
+          <input matInput id="itemsCompany" type="text" formControlName="itemsCompany">
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="column" fxFlex.gt-sm="33%" fxFlex.sm="50%" fxFlex.xs="100%" fxFlexOrder="12" fxFlexOrder.sm="12"
+        fxFlexOrder.xs="12">
+        <mat-form-field appearance="fill" tabindex="12">
+          <mat-label for="technologiesUsed">Zastosowane technologie</mat-label>
+          <input matInput id="technologiesUsed" type="text" formControlName="technologiesUsed">
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="column" fxFlex.gt-sm="33%" fxFlex.sm="50%" fxFlex.xs="100%" fxFlexOrder="13" fxFlexOrder.sm="13"
+        fxFlexOrder.xs="12">
+        <mat-form-field appearance="fill" tabindex="13">
+          <mat-label for="communicationSystem">System komunikacji</mat-label>
+          <input matInput id="communicationSystem" type="text" formControlName="communicationSystem">
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="column" fxFlex.gt-sm="33%" fxFlex.sm="50%" fxFlex.xs="100%" fxFlexOrder="14" fxFlexOrder.sm="14"
+        fxFlexOrder.xs="14">
+        <mat-form-field appearance="fill" tabindex="14">
+          <mat-label for="strengths">Silne strony</mat-label>
+          <input matInput id="strengths" type="text" formControlName="strengths">
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="column" fxFlex.gt-sm="33%" fxFlex.sm="50%" fxFlex.xs="100%" fxFlexOrder="15" fxFlexOrder.sm="15"
+        fxFlexOrder.xs="15">
+        <mat-form-field appearance="fill" tabindex="15">
+          <mat-label for="weaknesses">Słabe strony</mat-label>
+          <input matInput id="weaknesses" type="text" formControlName="weaknesses">
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="column" fxFlex.gt-sm="33%" fxFlex.sm="50%" fxFlex.xs="100%" fxFlexOrder="16" fxFlexOrder.sm="16"
+        fxFlexOrder.xs="16">
+        <mat-form-field appearance="fill" tabindex="16">
+          <mat-label for="opportunitiesForTheCompany">Szanse dla firmy</mat-label>
+          <input matInput id="opportunitiesForTheCompany" type="text" formControlName="opportunitiesForTheCompany">
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="column" fxFlex.gt-sm="33%" fxFlex.sm="50%" fxFlex.xs="100%" fxFlexOrder="17" fxFlexOrder.sm="17"
+        fxFlexOrder.xs="17">
+        <mat-form-field appearance="fill" tabindex="17">
+          <mat-label for="threatsToTheCompany">Zagrożenia dla firmy</mat-label>
+          <input matInput id="threatsToTheCompany" type="text" formControlName="threatsToTheCompany">
+        </mat-form-field>
+      </div>
+    </div>
+    <button mat-raised-button color="primary" type="submit" class="add-company">{{ buttonSubmitText }}</button>
+  </form>
+</div>

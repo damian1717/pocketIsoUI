@@ -1,0 +1,77 @@
+<div class="main-content">
+  <p class="header-name">Informacje o pracowniku</p>
+  <div>
+    <form [formGroup]="employeeForm" fxLayout="column" (ngSubmit)="onSubmit()">
+
+      <div fxLayout="column" fxFlex.gt-sm="100%" fxFlex.sm="100%" fxFlex.xs="100%" fxFlexOrder="1" fxFlexOrder.sm="1"
+        fxFlexOrder.xs="1">
+        <mat-form-field appearance="fill">
+          <mat-label>Imie</mat-label>
+          <input matInput id="name" type="text" formControlName="name">
+          <mat-error *ngIf="(nameValue?.errors || null)?.['required']">
+            Imie jest wymagane.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="column" fxFlex.gt-sm="100%" fxFlex.sm="100%" fxFlex.xs="100%" fxFlexOrder="2" fxFlexOrder.sm="2"
+        fxFlexOrder.xs="2">
+        <mat-form-field appearance="fill">
+          <mat-label>Nazwisko</mat-label>
+          <input matInput id="lastName" type="text" formControlName="lastName">
+          <mat-error *ngIf="(lastNameValue?.errors || null)?.['required']">
+            Nazwisko jest wymagane.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="column" fxFlex.gt-sm="100%" fxFlex.sm="100%" fxFlex.xs="100%" fxFlexOrder="3" fxFlexOrder.sm="3"
+        fxFlexOrder.xs="3">
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input email matInput id="email" type="email" formControlName="email" [email]="true">
+          <mat-error *ngIf="(emailValue?.errors || null)?.['required']">
+            Email jest wymagany.
+          </mat-error>
+          <mat-error *ngIf="(emailValue?.errors || null)?.['email']">
+            Email jest nieprawidłowy.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="column" fxFlex.gt-sm="100%" fxFlex.sm="100%" fxFlex.xs="100%" fxFlexOrder="4" fxFlexOrder.sm="4"
+        fxFlexOrder.xs="4">
+        <mat-form-field appearance="fill">
+          <mat-label>Zawód</mat-label>
+          <input matInput id="position" type="text" formControlName="position">
+          <mat-error *ngIf="(positionValue?.errors || null)?.['required']">
+            Zawód jest wymagany.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="column" fxFlex.gt-sm="100%" fxFlex.sm="100%" fxFlex.xs="100%" fxFlexOrder="5" fxFlexOrder.sm="5"
+        fxFlexOrder.xs="5">
+        <mat-form-field appearance="fill">
+          <mat-label>Level</mat-label>
+          <mat-select formControlName="level" name="level">
+            <mat-option *ngFor="let level of levels" [value]="level">
+              {{level}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="levelValue?.hasError('notDefineLevels')">
+            Brak zdefiniowanych leveli w schemacie organizacji.
+          </mat-error>
+          <mat-error *ngIf="(levelValue?.errors || null)?.['required']">
+            Level jest wymagany.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div style="justify-content: center;">
+        <button mat-raised-button (click)="cancel()" style="margin-right: 10px;">Anuluj</button>
+        <button mat-raised-button color="primary" type="submit">Zapisz</button>
+      </div>
+    </form>
+  </div>
+</div>

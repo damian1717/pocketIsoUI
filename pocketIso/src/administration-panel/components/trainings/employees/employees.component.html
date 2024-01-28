@@ -1,0 +1,76 @@
+<div>
+  <button mat-raised-button color="primary" (click)="addEmployee()">Dodaj pracownika</button>
+</div>
+
+<div class="table-content">
+  <mat-form-field class="filter-label">
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Filter" #input>
+  </mat-form-field>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Imię </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="lastName">
+      <th mat-header-cell *matHeaderCellDef> Nazwisko </th>
+      <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef> Email </th>
+      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef> Zawód </th>
+      <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="level">
+      <th mat-header-cell *matHeaderCellDef> Level </th>
+      <td mat-cell *matCellDef="let element"> {{element.level}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="existInChartOrg">
+      <th mat-header-cell *matHeaderCellDef> Istnieje w schemacie organizacji </th>
+      <td mat-cell *matCellDef="let element">
+        <span *ngIf="element.existInChartOrg">Tak</span>
+        <span *ngIf="!element.existInChartOrg">Nie</span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="trainings">
+      <th mat-header-cell *matHeaderCellDef> Szkolenia </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-raised-button color="primary" (click)="openTrainings(element.id, element.level, element.existInChartOrg)">Szkolenia</button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef> Edycja </th>
+      <td mat-cell *matCellDef="let element">
+        <button *ngIf="!element.existInChartOrg" mat-raised-button color="primary"
+          (click)="editEmployee(element.id)">Edycja</button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef> Usuń </th>
+      <td mat-cell *matCellDef="let element">
+        <button *ngIf="!element.existInChartOrg" mat-raised-button color="primary"
+          (click)="deleteUser(element.id)">Usuń</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="3">Nie ma danych dla wybranych filtrów.</td>
+    </tr>
+  </table>
+</div>

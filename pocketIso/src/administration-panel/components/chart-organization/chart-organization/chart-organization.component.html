@@ -1,0 +1,28 @@
+<div class="main-content">
+    <p class="header-name">SCHEMAT ORGANIZACJI</p>
+    <div class="card flex justify-content-center overflow-x-auto" style="padding-top: 40px;">
+        <p-organizationChart [value]="data" selectionMode="multiple" [(selection)]="selectedNodes">
+            <ng-template let-node pTemplate="person">
+                <div class="p-2 text-center">
+                    <img [src]="node.data.image" class="mb-3 w-3rem h-3rem" />
+                    <div class="font-bold">{{ node.data.name }}</div>
+                    <div>{{ node.data.title }}</div>
+                </div>
+            </ng-template>
+        </p-organizationChart>
+    </div>
+</div>
+
+<div class="save-to-pdf-btn">
+    <button mat-raised-button color="primary" (click)="generateReport()">Zapisz do pdf</button>
+</div>
+
+<div *ngIf="documents && documents.length > 0" style="margin: auto; width: 50%; padding-top: 70px;">
+    <p>Lista utworzonych dokumentów:</p>
+    <mat-list>
+        <mat-list-item *ngFor="let document of documents">
+            <div matListItemTitle style="padding-right: 20px;">{{document.name}}</div>
+            <mat-icon matListItemIcon (click)="downloadDocumnet(document.id, document.name)">download</mat-icon>
+        </mat-list-item>
+    </mat-list>
+</div>

@@ -1,0 +1,40 @@
+.nav-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  
+    .nav-is-mobile .nav-toolbar {
+      position: fixed;
+      z-index: 2;
+    }
+    
+    h1.nav-app-name {
+      margin-left: 8px;
+    }
+    
+    .nav-sidenav-container {
+      flex: 1;
+    }
+    
+    .nav-is-mobile .nav-sidenav-container {
+      flex: 1 0 auto;
+    }
+  
+    .nav-item {
+      padding-left: 24px;
+    }
+  
+    .side-nav-content {
+      padding: 20px;
+    }
+  
+    .menu-class {
+      margin-left: auto;
+    }
+  }
+  
+  
