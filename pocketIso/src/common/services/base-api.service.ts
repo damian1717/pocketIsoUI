@@ -60,8 +60,8 @@ export class BaseApiService {
             if (!error?.error?.message) {
                 return throwError(errorMessage);
             }
-            errorMessage = error.error.message;
-            return throwError(errorMessage);
+            
+            return throwError(error.error);
         }
         return throwError(error);
     }

@@ -3,5 +3,6 @@ export interface Regulation {
     name: string;
     link: string;
     description: string;
+    category: number;
   }
   

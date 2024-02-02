@@ -38,7 +38,7 @@ export class ChangePasswordDialogComponent implements OnInit {
         this.displayMessage('Hasło zostało zmienione.');
         this.dialogRef.close();
       },
-        err => this.displayMessage(err),
+        err => this.displayMessage(err?.message),
         () => { });
 
     } else {

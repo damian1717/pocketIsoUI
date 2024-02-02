@@ -86,7 +86,7 @@ export class AddCompanyComponent implements OnInit {
           this.displayMessage('Firma dodana.');
           this.resetCompanyForm(formDirective);
         },
-          err => this.displayMessage(err),
+          err => this.displayMessage(err?.message),
           () => { });
       }
     }

@@ -79,7 +79,7 @@ export class UserListComponent implements OnInit {
               this.displayMessage('Użytkownik została usunięta.');
               this.getUsers();
             },
-            err => this.displayMessage(err),
+            err => this.displayMessage(err?.message),
             () => { }
           );
         }

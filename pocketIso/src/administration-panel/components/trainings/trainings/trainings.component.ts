@@ -51,7 +51,7 @@ export class TrainingsComponent implements OnInit {
             this.displayMessage('Szkolenie zostało usunięte.');
             this.getTrainings();
           },
-          err => this.displayMessage(err),
+          err => this.displayMessage(err?.message),
           () => { }
         );
       }

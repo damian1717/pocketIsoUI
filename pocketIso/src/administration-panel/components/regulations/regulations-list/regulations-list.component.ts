@@ -13,7 +13,16 @@ import { Role } from '../../../../common/enums/user-role-codes';
 })
 export class RegulationsListComponent implements OnInit {
 
-  regulation: Regulation[] = [];
+  qualityRegulation: Regulation[] = [];
+  financeRegulation: Regulation[] = [];
+  waterManagementRegulation: Regulation[] = [];
+  noiseEmissionsRegulation: Regulation[] = [];
+  wasteGenerationRegulation: Regulation[] = [];
+  packagingManagementRegulation: Regulation[] = [];
+  gasEmissionsRegulation: Regulation[] = [];
+  generalRequirementsRegulation: Regulation[] = [];
+  bhpRegulation: Regulation[] = [];
+
   canEdit = true;
   constructor(private regulationService: RegulationService, private router: Router, private authService: AuthService) { }
 
@@ -28,7 +37,16 @@ export class RegulationsListComponent implements OnInit {
 
   displayedColumns: string[] =
     ['name', 'link', 'description', 'edit'];
-  dataSource = new MatTableDataSource(this.regulation);
+
+  financeDataSource = new MatTableDataSource(this.financeRegulation);
+  qualityDataSource = new MatTableDataSource(this.qualityRegulation);
+  waterManagementDataSource = new MatTableDataSource(this.waterManagementRegulation);
+  noiseEmissionsDataSource = new MatTableDataSource(this.noiseEmissionsRegulation);
+  wasteGenerationDataSource = new MatTableDataSource(this.wasteGenerationRegulation);
+  packagingManagementDataSource = new MatTableDataSource(this.packagingManagementRegulation);
+  gasEmissionsDataSource = new MatTableDataSource(this.gasEmissionsRegulation);
+  generalRequirementsDataSource = new MatTableDataSource(this.generalRequirementsRegulation);
+  bhpDataSource = new MatTableDataSource(this.bhpRegulation);
 
   private canEditRegulation() {
     let role = this.authService.getRole();
@@ -40,15 +58,46 @@ export class RegulationsListComponent implements OnInit {
     }
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
   getQualityPolicies() {
     this.regulationService.getRegulations().subscribe(x => {
-      this.regulation = x;
-      this.dataSource.data = x;
+      if (x && x.length > 0) {
+        const financeReg = x.filter(x => x.category == 1);
+        this.financeRegulation = financeReg;
+        this.financeDataSource.data = financeReg;
+
+        const qualityReg = x.filter(x => x.category == 2);
+        this.qualityRegulation = qualityReg;
+        this.qualityDataSource.data = qualityReg;
+
+        const waterManagements = x.filter(x => x.category == 3);
+        this.waterManagementRegulation = waterManagements;
+        this.waterManagementDataSource.data = waterManagements;
+
+        const noiseEmissionsRegulations = x.filter(x => x.category == 4);
+        this.noiseEmissionsRegulation = noiseEmissionsRegulations;
+        this.noiseEmissionsDataSource.data = noiseEmissionsRegulations;
+
+        const wasteGenerationRegulations = x.filter(x => x.category == 5);
+        this.wasteGenerationRegulation = wasteGenerationRegulations;
+        this.wasteGenerationDataSource.data = wasteGenerationRegulations;
+
+        const packagingManagementRegulations = x.filter(x => x.category == 6);
+        this.packagingManagementRegulation = packagingManagementRegulations;
+        this.packagingManagementDataSource.data = packagingManagementRegulations;
+
+        const gasEmissionsRegulations = x.filter(x => x.category == 7);
+        this.gasEmissionsRegulation = gasEmissionsRegulations;
+        this.gasEmissionsDataSource.data = gasEmissionsRegulations;
+
+        const generalRequirementsRegulations = x.filter(x => x.category == 8);
+        this.generalRequirementsRegulation = generalRequirementsRegulations;
+        this.generalRequirementsDataSource.data = generalRequirementsRegulations;
+
+        const bhpRegulations = x.filter(x => x.category == 9);
+        this.bhpRegulation = bhpRegulations;
+        this.bhpDataSource.data = bhpRegulations;
+      }
+
     })
   }
 

@@ -37,7 +37,7 @@ export const NAV_DATA: NavItem[] = [
         role: 'admin'
       },
       {
-        name: 'DODAJ PRZYPIS PRAWNY',
+        name: 'DODAJ PRZEPIS PRAWNY',
         url: 'add-regulation',
         role: 'admin'
       },

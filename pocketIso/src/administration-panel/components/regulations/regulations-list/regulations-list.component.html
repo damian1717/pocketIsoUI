@@ -1,9 +1,285 @@
-<mat-form-field class="filter-label">
-  <mat-label>Filter</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="Filter" #input>
-</mat-form-field>
+<h2 class="category-header">Finanse</h2>
+<table mat-table [dataSource]="financeDataSource" class="mat-elevation-z8">
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Nazwa </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="link">
+    <th mat-header-cell *matHeaderCellDef> Link </th>
+    <td mat-cell *matCellDef="let element">
+      <a target="_blank" href="{{element.link}}"> {{element.link}}</a>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef> Opis </th>
+    <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="edit">
+    <th mat-header-cell *matHeaderCellDef> Edycja </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-raised-button color="primary" (click)="redirectToEditRegulation(element.id)">Edycja</button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" colspan="3">Nie ma danych dla wybranych filtrów.</td>
+  </tr>
+</table>
+
+<h2 class="category-header">Jakość</h2>
+<table mat-table [dataSource]="qualityDataSource" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Nazwa </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="link">
+    <th mat-header-cell *matHeaderCellDef> Link </th>
+    <td mat-cell *matCellDef="let element">
+      <a target="_blank" href="{{element.link}}"> {{element.link}}</a>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef> Opis </th>
+    <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="edit">
+    <th mat-header-cell *matHeaderCellDef> Edycja </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-raised-button color="primary" (click)="redirectToEditRegulation(element.id)">Edycja</button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" colspan="3">Nie ma danych dla wybranych filtrów.</td>
+  </tr>
+</table>
+
+<h2 class="category-header">Gospodarka wodnościekowa</h2>
+<table mat-table [dataSource]="waterManagementDataSource" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Nazwa </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="link">
+    <th mat-header-cell *matHeaderCellDef> Link </th>
+    <td mat-cell *matCellDef="let element">
+      <a target="_blank" href="{{element.link}}"> {{element.link}}</a>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef> Opis </th>
+    <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="edit">
+    <th mat-header-cell *matHeaderCellDef> Edycja </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-raised-button color="primary" (click)="redirectToEditRegulation(element.id)">Edycja</button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" colspan="3">Nie ma danych dla wybranych filtrów.</td>
+  </tr>
+</table>
+
+<h2 class="category-header">Emisja hałasu</h2>
+<table mat-table [dataSource]="noiseEmissionsDataSource" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Nazwa </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="link">
+    <th mat-header-cell *matHeaderCellDef> Link </th>
+    <td mat-cell *matCellDef="let element">
+      <a target="_blank" href="{{element.link}}"> {{element.link}}</a>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef> Opis </th>
+    <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="edit">
+    <th mat-header-cell *matHeaderCellDef> Edycja </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-raised-button color="primary" (click)="redirectToEditRegulation(element.id)">Edycja</button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" colspan="3">Nie ma danych dla wybranych filtrów.</td>
+  </tr>
+</table>
+
+<h2 class="category-header">Wytwarzanie odpadów</h2>
+<table mat-table [dataSource]="wasteGenerationDataSource" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Nazwa </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="link">
+    <th mat-header-cell *matHeaderCellDef> Link </th>
+    <td mat-cell *matCellDef="let element">
+      <a target="_blank" href="{{element.link}}"> {{element.link}}</a>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef> Opis </th>
+    <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="edit">
+    <th mat-header-cell *matHeaderCellDef> Edycja </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-raised-button color="primary" (click)="redirectToEditRegulation(element.id)">Edycja</button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" colspan="3">Nie ma danych dla wybranych filtrów.</td>
+  </tr>
+</table>
+
+<h2 class="category-header">Gospodarka opakowaniami</h2>
+<table mat-table [dataSource]="packagingManagementDataSource" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Nazwa </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="link">
+    <th mat-header-cell *matHeaderCellDef> Link </th>
+    <td mat-cell *matCellDef="let element">
+      <a target="_blank" href="{{element.link}}"> {{element.link}}</a>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef> Opis </th>
+    <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="edit">
+    <th mat-header-cell *matHeaderCellDef> Edycja </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-raised-button color="primary" (click)="redirectToEditRegulation(element.id)">Edycja</button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" colspan="3">Nie ma danych dla wybranych filtrów.</td>
+  </tr>
+</table>
+
+<h2 class="category-header">Emisja gazów i pyłów do powietrza</h2>
+<table mat-table [dataSource]="gasEmissionsDataSource" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Nazwa </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="link">
+    <th mat-header-cell *matHeaderCellDef> Link </th>
+    <td mat-cell *matCellDef="let element">
+      <a target="_blank" href="{{element.link}}"> {{element.link}}</a>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef> Opis </th>
+    <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="edit">
+    <th mat-header-cell *matHeaderCellDef> Edycja </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-raised-button color="primary" (click)="redirectToEditRegulation(element.id)">Edycja</button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" colspan="3">Nie ma danych dla wybranych filtrów.</td>
+  </tr>
+</table>
+
+<h2 class="category-header">Wymagania ogólne</h2>
+<table mat-table [dataSource]="generalRequirementsDataSource" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Nazwa </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="link">
+    <th mat-header-cell *matHeaderCellDef> Link </th>
+    <td mat-cell *matCellDef="let element">
+      <a target="_blank" href="{{element.link}}"> {{element.link}}</a>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef> Opis </th>
+    <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="edit">
+    <th mat-header-cell *matHeaderCellDef> Edycja </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-raised-button color="primary" (click)="redirectToEditRegulation(element.id)">Edycja</button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" colspan="3">Nie ma danych dla wybranych filtrów.</td>
+  </tr>
+</table>
+
+<h2 class="category-header">BHP</h2>
+<table mat-table [dataSource]="bhpDataSource" class="mat-elevation-z8">
 
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef> Nazwa </th>

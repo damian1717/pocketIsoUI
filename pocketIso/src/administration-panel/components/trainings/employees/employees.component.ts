@@ -79,7 +79,7 @@ export class EmployeesComponent implements OnInit {
             this.displayMessage('Pracownik została usunięta.');
             this.getEmployees();
           },
-          err => this.displayMessage(err),
+          err => this.displayMessage(err?.message),
           () => { }
         );
       }

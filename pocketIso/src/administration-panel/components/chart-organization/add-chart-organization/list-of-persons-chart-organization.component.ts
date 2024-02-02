@@ -125,7 +125,27 @@ export class ListOfPersonsChartOrganizationComponent implements OnInit {
             this.displayMessage('Osoba została usunięta.');
             this.getPersonsLists();
           },
-          err => this.displayMessage(err),
+          err => {
+            console.log(err);
+            if (err) {
+              if (err.code === 'below_person_exists') {
+                const dialogRef = this.dialog.open(ConfirmationDialogComponent, { data: { text: 'Czy napewno chce usunąć siebie i wszystkich pracownikow pod soba?' } });
+
+                dialogRef.afterClosed().subscribe(result => {
+                  if (result) {
+                    this.organizationChartService.deleteOrganizationChartPersonAndBelowPersons(id).subscribe(
+                      res => {
+                        this.displayMessage('Osoby zostały usunięte.');
+                        this.getPersonsLists();
+                      },
+                      err => { this.displayMessage(err?.message) });
+                  }
+                });
+              }
+            } else {
+              this.displayMessage(err?.message);
+            }
+          },
           () => { }
         );
       }

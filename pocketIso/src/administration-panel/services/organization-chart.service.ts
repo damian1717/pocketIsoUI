@@ -37,4 +37,8 @@ export class OrganizationChartService extends BaseApiService {
   public deletePersonOrganizationChart(id: string): Observable<OrganizationChartPersonInfo> {
     return this.deleteAsync<OrganizationChartPersonInfo>(`organizationchart/DeleteOrganizationChartPerson/${id}`);
   }
+
+  public deleteOrganizationChartPersonAndBelowPersons(id: string): Observable<OrganizationChartPersonInfo> {
+    return this.deleteAsync<OrganizationChartPersonInfo>(`organizationchart/DeleteOrganizationChartPersonAndBelowPersons/${id}`);
+  }
 }

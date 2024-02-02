@@ -35,60 +35,20 @@
     <td mat-cell *matCellDef="let element"> {{element.street}} </td>
   </ng-container>
 
-  <ng-container matColumnDef="numberBuilding">
-    <th mat-header-cell *matHeaderCellDef> Nr. Budynku </th>
-    <td mat-cell *matCellDef="let element"> {{element.numberBuilding}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="numberApartment">
-    <th mat-header-cell *matHeaderCellDef> Nr. Lokalu </th>
-    <td mat-cell *matCellDef="let element"> {{element.numberApartment}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="knowHow">
-    <th mat-header-cell *matHeaderCellDef> Know-How </th>
-    <td mat-cell *matCellDef="let element"> {{element.knowHow}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="itemsCompany">
-    <th mat-header-cell *matHeaderCellDef> Cele firmy </th>
-    <td mat-cell *matCellDef="let element"> {{element.itemsCompany}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="technologiesUsed">
-    <th mat-header-cell *matHeaderCellDef> Technologie </th>
-    <td mat-cell *matCellDef="let element"> {{element.technologiesUsed}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="communicationSystem">
-    <th mat-header-cell *matHeaderCellDef> System komunikacji </th>
-    <td mat-cell *matCellDef="let element"> {{element.communicationSystem}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="strengths">
-    <th mat-header-cell *matHeaderCellDef> Silne strony </th>
-    <td mat-cell *matCellDef="let element"> {{element.strengths}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="weaknesses">
-    <th mat-header-cell *matHeaderCellDef> Słabe strony </th>
-    <td mat-cell *matCellDef="let element"> {{element.weaknesses}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="opportunitiesForTheCompany">
-    <th mat-header-cell *matHeaderCellDef> Szanse dla firmy </th>
-    <td mat-cell *matCellDef="let element"> {{element.opportunitiesForTheCompany}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="threatsToTheCompany">
-    <th mat-header-cell *matHeaderCellDef> Zagrożenia dla firmy </th>
-    <td mat-cell *matCellDef="let element"> {{element.threatsToTheCompany}} </td>
-  </ng-container>
-
   <ng-container matColumnDef="edit">
     <th mat-header-cell *matHeaderCellDef> Edycja </th>
     <td mat-cell *matCellDef="let element">
-      <button mat-raised-button color="primary" (click)="redirectToEditCompany(element.id)">Edycja</button>
+      <button *ngIf="!element.isArchive" mat-raised-button color="primary"
+        (click)="redirectToEditCompany(element.id)">Edycja</button>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="archive">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element">
+      <button *ngIf="!element.isArchive" mat-raised-button color="primary"
+        (click)="archive(element)">Archiwizuj</button>
+      <span *ngIf="element.isArchive">Zarchiwizowana</span>
     </td>
   </ng-container>
 

@@ -1,6 +1,6 @@
 <div class="main-content">
 
-  <p class="header-name">Przypis prawny</p>
+  <p class="header-name">Przepis prawny</p>
 
   <form [formGroup]="regulationForm" fxLayout="column" (ngSubmit)="onSubmit()">
     <div fxLayout="row wrap" fxLayoutGap="20px grid" fxLayoutAlign="start start">
@@ -9,7 +9,19 @@
 
       <div fxLayout="column" fxFlex.gt-sm="100%" fxFlex.sm="100%" fxFlex.xs="100%" fxFlexOrder="1" fxFlexOrder.sm="1"
         fxFlexOrder.xs="1">
-        <mat-form-field appearance="fill" tabindex="1">
+        <mat-form-field appearance="fill">
+          <mat-label>Kategoria</mat-label>
+          <mat-select id="category" type="text" formControlName="category" name="category">
+            <mat-option *ngFor="let category of categories" [value]="category.value">
+              {{category.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="column" fxFlex.gt-sm="100%" fxFlex.sm="100%" fxFlex.xs="100%" fxFlexOrder="2" fxFlexOrder.sm="2"
+        fxFlexOrder.xs="2">
+        <mat-form-field appearance="fill" tabindex="2">
           <mat-label for="name">Nazwa</mat-label>
           <input matInput id="name" type="text" formControlName="name">
           <mat-error *ngIf="(nameValue?.errors || null)?.['required']">
@@ -18,23 +30,24 @@
         </mat-form-field>
       </div>
 
-      <div fxLayout="column" fxFlex.gt-sm="100%" fxFlex.sm="100%" fxFlex.xs="100%" fxFlexOrder="2" fxFlexOrder.sm="2"
-        fxFlexOrder.xs="2">
-        <mat-form-field appearance="fill" tabindex="2">
+      <div fxLayout="column" fxFlex.gt-sm="100%" fxFlex.sm="100%" fxFlex.xs="100%" fxFlexOrder="3" fxFlexOrder.sm="3"
+        fxFlexOrder.xs="3">
+        <mat-form-field appearance="fill" tabindex="3">
           <mat-label for="name">Link</mat-label>
           <input matInput id="link" type="text" formControlName="link">
         </mat-form-field>
       </div>
 
-      <div fxLayout="column" fxFlex.gt-sm="100%" fxFlex.sm="100%" fxFlex.xs="100%" fxFlexOrder="3" fxFlexOrder.sm="3"
-        fxFlexOrder.xs="3">
-        <mat-form-field appearance="fill" tabindex="3">
+      <div fxLayout="column" fxFlex.gt-sm="100%" fxFlex.sm="100%" fxFlex.xs="100%" fxFlexOrder="4" fxFlexOrder.sm="4"
+        fxFlexOrder.xs="4">
+        <mat-form-field appearance="fill" tabindex="4">
           <mat-label for="description">Opis</mat-label>
           <input matInput id="description" type="text" formControlName="description">
         </mat-form-field>
       </div>
 
     </div>
+    <button mat-raised-button style="margin-right: 20px;" class="regulation" (click)="redirectToRegulations()">Przepisy prawne</button>
     <button mat-raised-button color="primary" type="submit" class="regulation">Zapisz</button>
   </form>
 </div>
