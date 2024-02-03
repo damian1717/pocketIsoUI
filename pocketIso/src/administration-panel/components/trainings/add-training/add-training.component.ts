@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { OrganizationChartService } from '../../../../administration-panel/services/organization-chart.service';
 import { TrainingsService } from '../../../../administration-panel/services/trainings.service';
 import { Training } from '../../../../administration-panel/models/training.model';
@@ -28,7 +28,7 @@ export class AddTrainingComponent implements OnInit {
   levels: number[] = [];
 
   constructor(private trainingsService: TrainingsService, private route: ActivatedRoute, private snackBar: MatSnackBar,
-    private organizationChartService: OrganizationChartService) { }
+    private organizationChartService: OrganizationChartService, private router: Router) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
@@ -97,5 +97,9 @@ export class AddTrainingComponent implements OnInit {
         this.levelValue?.setErrors({ 'notDefineLevels': true });
       }
     });
+  }
+
+  redirectToTrainings() {
+    this.router.navigateByUrl(`trainings`);
   }
 }

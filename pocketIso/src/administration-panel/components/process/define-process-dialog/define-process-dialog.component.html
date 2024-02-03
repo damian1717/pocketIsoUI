@@ -1,24 +1,24 @@
-
 <mat-dialog-content>
   <form class="content" [formGroup]="definitionProcessForm" fxLayout="column" (ngSubmit)="onSubmit()">
     <div fxLayout="row wrap" fxLayoutGap="20px grid" fxLayoutAlign="start start">
-  
+
       <input hidden matInput id="id" type="text" formControlName="id">
       <input hidden matInput id="processId" type="text" formControlName="processId">
       <input hidden matInput id="code" type="text" formControlName="code">
-  
+
       <div fxLayout="column" fxFlex.gt-sm="100%" fxFlex.sm="100%" fxFlex.xs="100%" fxFlexOrder="1" fxFlexOrder.sm="1"
         fxFlexOrder.xs="1">
         <mat-form-field appearance="fill" tabindex="1">
-          <mat-label for="name">Nazwa</mat-label>
-          <input matInput id="name" type="text" formControlName="name">
+          <mat-label for="name">Cel</mat-label>
+          <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
+            cdkAutosizeMaxRows="5" id="name" type="text" formControlName="name"></textarea>
           <mat-error *ngIf="(nameValue?.errors || null)?.['required']">
-            Nazwa jest wymagana.
+            Cel jest wymagany.
           </mat-error>
         </mat-form-field>
       </div>
 
-      <mat-checkbox *ngIf="false"  hidden id="isBase" formControlName="isBase"></mat-checkbox>
+      <mat-checkbox *ngIf="false" hidden id="isBase" formControlName="isBase"></mat-checkbox>
     </div>
   </form>
 

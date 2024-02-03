@@ -29,4 +29,8 @@ export class RegulationService extends BaseApiService {
   public updateRegulation(company: Regulation): Observable<Regulation> {
     return this.postAsync<Regulation>(`regulation/updateregulation`, company);
   }
+
+  public deleteRegulation(id: string): Observable<Regulation> {
+    return this.deleteAsync<Regulation>(`regulation/deleteregulation/${id}`);
+  }
 }

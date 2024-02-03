@@ -14,6 +14,7 @@ import { DefinitionOfProcessCode } from '../../../../common/enums/definition-of-
 import { DefineProcessDialogComponent } from '../define-process-dialog/define-process-dialog.component';
 import { DefinitionProcessReport } from '../../../../common/models/definition-process-report.model';
 import { RaportCode } from '../../../../common/enums/raport-codes';
+import { ConfirmationDialogComponent } from 'src/common/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-define-process',
@@ -33,7 +34,7 @@ export class DefineProcessComponent implements OnInit {
   documentsDataSource = new MatTableDataSource(this.defineOfProcesses);
   itemsDataSource = new MatTableDataSource(this.defineOfProcesses);
 
-  documents : DocumentInfo[] = [];
+  documents: DocumentInfo[] = [];
   processId: string = '';
   processName: string = '';
 
@@ -141,7 +142,7 @@ export class DefineProcessComponent implements OnInit {
 
   add(processId: string, definitionOfProcessCode: string) {
     const dialogRef = this.dialog.open(DefineProcessDialogComponent, {
-      width: '350px',
+      width: '500px',
       data: { id: '', name: '', isBase: false, processId: processId, code: definitionOfProcessCode } as DefineOfProcess
     });
 
@@ -156,7 +157,7 @@ export class DefineProcessComponent implements OnInit {
   edit(id: any, definitionOfProcessCode: string) {
     this.definitionOfProcessService.getDefinitionOfProcessById(id).subscribe(p => {
       const dialogRef = this.dialog.open(DefineProcessDialogComponent, {
-        width: '350px',
+        width: '500px',
         data: { id: id, name: p.name, isBase: false, processId: this.processId, code: definitionOfProcessCode } as DefineOfProcess
       });
 
@@ -170,9 +171,15 @@ export class DefineProcessComponent implements OnInit {
   }
 
   delete(id: any) {
-    this.definitionOfProcessService.deleteDefineOfProcess(id).subscribe(x => {
-      this.getDataSources();
-      this.displayMessage('Definicja procesu usunieta.');
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, { data: { text: 'Czy napewno chce usunąć definicje procesu?' } });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.definitionOfProcessService.deleteDefineOfProcess(id).subscribe(x => {
+          this.getDataSources();
+          this.displayMessage('Definicja procesu usunieta.');
+        });
+      }
     });
   }
 
@@ -182,25 +189,25 @@ export class DefineProcessComponent implements OnInit {
 
   generateRaportPdf() {
     const request = { processId: this.processId, processName: this.processName } as DefinitionProcessReport;
-    
+
     this.raport.generateDefinitionProcessRaportPdf(request)
-    .subscribe(
-      resp => {
-        this.saveAsService.save(resp.body, resp.filename);
-        this.getDataSources();
-        this.getDocuments();
-      }
-    );
+      .subscribe(
+        resp => {
+          this.saveAsService.save(resp.body, resp.filename);
+          this.getDataSources();
+          this.getDocuments();
+        }
+      );
   }
 
   downloadDocumnet(id: string) {
     this.documentService.downloadFileById(id)
-    .subscribe(
-      resp =>  { 
-        this.saveAsService.save(resp.body, resp.filename);
-        this.displayMessage(`Raport wygenerowany dla procesu.`);
-      }
-    );
+      .subscribe(
+        resp => {
+          this.saveAsService.save(resp.body, resp.filename);
+          this.displayMessage(`Raport wygenerowany dla procesu.`);
+        }
+      );
   }
 
   private getDocuments() {

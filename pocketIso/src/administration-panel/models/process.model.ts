@@ -5,4 +5,5 @@ export interface Process {
     name: string;
     isBaseProcess: boolean;
     companyName: string;
+    processType: number;
 }

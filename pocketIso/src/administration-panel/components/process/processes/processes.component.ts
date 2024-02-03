@@ -13,7 +13,9 @@ import { Role } from '../../../../common/enums/user-role-codes';
 })
 export class ProcessesComponent implements OnInit {
 
-  processes: Process[] = [];
+  managerProcesses: Process[] = [];
+  mainProcesses: Process[] = [];
+  supportingProcesses: Process[] = [];
   displayedColumns: string[] = ['name', 'edit', 'defineprocess'];
   showCompanyName = true;
 
@@ -34,25 +36,44 @@ export class ProcessesComponent implements OnInit {
     }
   }
 
-  
-  dataSource = new MatTableDataSource(this.processes);
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
+  managerDataSource = new MatTableDataSource(this.managerProcesses);
+  mainDataSource = new MatTableDataSource(this.mainProcesses);
+  supportingDataSource = new MatTableDataSource(this.supportingProcesses);
 
   getProcesses() {
     this.processService.getProcesses().subscribe(x => {
-      this.processes = x;
-      this.dataSource.data = x;
+      if (x && x.length) {
+        const managers = x.filter(x => x.processType === 1);;
+        this.managerProcesses = managers;
+        this.managerDataSource.data = managers;
+
+        const mains = x.filter(x => x.processType === 2);;
+        this.mainProcesses = mains;
+        this.mainDataSource.data = mains;
+
+        const supportings = x.filter(x => x.processType === 3);;
+        this.supportingProcesses = supportings;
+        this.supportingDataSource.data = supportings;
+      }
     })
   }
 
   getProcessesForSuperAdmin() {
     this.processService.getProcessesForSuperAdmin().subscribe(x => {
-      this.processes = x;
-      this.dataSource.data = x;
+      if (x && x.length) {
+        const managers = x.filter(x => x.processType === 1);
+        this.managerProcesses = managers;
+        this.managerDataSource.data = managers;
+
+        const mains = x.filter(x => x.processType === 2);;
+        this.mainProcesses = mains;
+        this.mainDataSource.data = mains;
+
+        const supportings = x.filter(x => x.processType === 3);;
+        this.supportingProcesses = supportings;
+        this.supportingDataSource.data = supportings;
+      }
     })
   }
 

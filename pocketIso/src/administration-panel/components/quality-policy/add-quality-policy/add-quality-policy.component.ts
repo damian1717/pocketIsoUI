@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { QualityPolicyService } from '../../../../administration-panel/services/quality-policy.service';
 import { QualityPolicy } from '../../../../administration-panel/models/quality-policy.model';
 
@@ -21,7 +21,7 @@ export class AddQualityPolicyComponent implements OnInit {
 
   nameValue = this.qualityPolicyForm.get('name');
   id: string | null = '';
-  constructor(private qualityPolicyService: QualityPolicyService, private route: ActivatedRoute, private snackBar: MatSnackBar) { }
+  constructor(private qualityPolicyService: QualityPolicyService, private route: ActivatedRoute, private snackBar: MatSnackBar, private router: Router) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
@@ -72,4 +72,7 @@ export class AddQualityPolicyComponent implements OnInit {
     this.nameValue?.setErrors(null);
   }
 
+  redirectToQualities(): void {
+    this.router.navigateByUrl(`quality-policies`);
+  }
 }

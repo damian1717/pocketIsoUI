@@ -5,6 +5,9 @@ import { RegulationService } from '../../../../administration-panel/services/reg
 import { AuthService } from '../../../../common/auth/auth.service';
 import { Regulation } from '../../../../administration-panel/models/regulation.model';
 import { Role } from '../../../../common/enums/user-role-codes';
+import { ConfirmationDialogComponent } from 'src/common/components/confirmation-dialog/confirmation-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-regulations-list',
@@ -22,9 +25,11 @@ export class RegulationsListComponent implements OnInit {
   gasEmissionsRegulation: Regulation[] = [];
   generalRequirementsRegulation: Regulation[] = [];
   bhpRegulation: Regulation[] = [];
-
+  displayedColumns: string[] = ['name', 'link', 'description', 'edit' , 'delete'];
   canEdit = true;
-  constructor(private regulationService: RegulationService, private router: Router, private authService: AuthService) { }
+
+  constructor(private regulationService: RegulationService, private router: Router, private authService: AuthService,
+    private snackBar: MatSnackBar, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.canEditRegulation();
@@ -35,8 +40,7 @@ export class RegulationsListComponent implements OnInit {
     }
   }
 
-  displayedColumns: string[] =
-    ['name', 'link', 'description', 'edit'];
+  
 
   financeDataSource = new MatTableDataSource(this.financeRegulation);
   qualityDataSource = new MatTableDataSource(this.qualityRegulation);
@@ -103,6 +107,27 @@ export class RegulationsListComponent implements OnInit {
 
   redirectToEditRegulation(id: string): void {
     this.router.navigateByUrl(`add-regulation/${id}`);
+  }
+
+  deleteRegulation(id: string) {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, { data: { text: 'Czy napewno chcesz usunąć?' } });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.regulationService.deleteRegulation(id).subscribe(
+          res => {
+            this.displayMessage('Przypis prawny został usunięty.');
+            this.getQualityPolicies();
+          },
+          err => this.displayMessage(err?.message),
+          () => { }
+        );
+      }
+    });
+  }
+
+  displayMessage(message: string) {
+    this.snackBar.open(message, '', { duration: 2500 });
   }
 
 }

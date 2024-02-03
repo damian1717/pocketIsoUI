@@ -11,7 +11,9 @@ import { ProcessService } from '../../../../administration-panel/services/proces
 })
 export class BaseProcessesComponent implements OnInit {
 
-  processes: Process[] = [];
+  managerProcesses: Process[] = [];
+  mainProcesses: Process[] = [];
+  supportingProcesses: Process[] = [];
   constructor(private processService: ProcessService, private router: Router) { }
 
   ngOnInit() {
@@ -19,17 +21,25 @@ export class BaseProcessesComponent implements OnInit {
   }
 
   displayedColumns: string[] = ['name', 'edit', 'defineprocess'];
-  dataSource = new MatTableDataSource(this.processes);
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
+  managerDataSource = new MatTableDataSource(this.managerProcesses);
+  mainDataSource = new MatTableDataSource(this.mainProcesses);
+  supportingDataSource = new MatTableDataSource(this.supportingProcesses);
 
   getProcesses() {
     this.processService.getBaseProcesses().subscribe(x => {
-      this.processes = x;
-      this.dataSource.data = x;
+      if (x && x.length) {
+        const managers = x.filter(x => x.processType === 1);;
+        this.managerProcesses = managers;
+        this.managerDataSource.data = managers;
+
+        const mains = x.filter(x => x.processType === 2);;
+        this.mainProcesses = mains;
+        this.mainDataSource.data = mains;
+
+        const supportings = x.filter(x => x.processType === 3);;
+        this.supportingProcesses = supportings;
+        this.supportingDataSource.data = supportings;
+      }
     })
   }
 

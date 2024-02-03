@@ -124,7 +124,7 @@ export class DefineBaseProcessComponent implements OnInit {
 
   add(processId: string, definitionOfProcessCode: string) {
     const dialogRef = this.dialog.open(DefineProcessDialogComponent, {
-      width: '350px',
+      width: '500px',
       data: { id: '', name: '', isBase: true, processId: processId, code: definitionOfProcessCode } as DefineOfProcess
     });
 
@@ -139,7 +139,7 @@ export class DefineBaseProcessComponent implements OnInit {
   edit(id: any, definitionOfProcessCode: string) {
     this.definitionOfProcessService.getDefinitionOfProcessById(id).subscribe(p => {
       const dialogRef = this.dialog.open(DefineProcessDialogComponent, {
-        width: '350px',
+        width: '500px',
         data: { id: id, name: p.name, isBase: true, processId: this.processId, code: definitionOfProcessCode } as DefineOfProcess
       });
 

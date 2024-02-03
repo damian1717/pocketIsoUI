@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProcessService } from '../../../services/process.service';
 import { Process } from '../../../../administration-panel/models/process.model';
+import { ProcessType } from '../../../../administration-panel/models/process-type.model';
 
 @Component({
   selector: 'app-add-process',
@@ -15,12 +16,16 @@ export class AddProcessComponent implements OnInit {
   processForm = new FormGroup({
     id: new FormControl(''),
     name: new FormControl('', Validators.required),
-    isBaseProcess: new FormControl(false)
+    isBaseProcess: new FormControl(false),
+    processType: new FormControl(0)
   });
 
-  constructor(private processService: ProcessService, private route: ActivatedRoute, private snackBar: MatSnackBar) { }
+  processTypes: ProcessType[] = [];
+  constructor(private processService: ProcessService, private route: ActivatedRoute, private snackBar: MatSnackBar, private router: Router) { }
 
   ngOnInit() {
+    this.getProcessTypes();
+
     this.id = this.route.snapshot.paramMap.get('id');
     if (this.id) {
       this.getProcess(this.id);
@@ -37,7 +42,8 @@ export class AddProcessComponent implements OnInit {
       this.processForm.patchValue({
         id: x.id,
         name: x.name,
-        isBaseProcess: x.isBaseProcess
+        isBaseProcess: x.isBaseProcess,
+        processType: x.processType
       });
     })
   }
@@ -66,10 +72,24 @@ export class AddProcessComponent implements OnInit {
       {
         id: '',
         name: '',
-        isBaseProcess: false
+        isBaseProcess: false,
+        processType: 0
       }
     );
 
     this.nameValue?.setErrors(null);
+  }
+
+  getProcessTypes() {
+    this.processTypes =
+    [
+      { value: 1, name: 'Procesy zarządcy' } as ProcessType,
+      { value: 2, name: 'Procesy główny' } as ProcessType,
+      { value: 3, name: 'Procesy wspierający' } as ProcessType
+    ];
+  }
+
+  redirectToProcessess(): void {
+    this.router.navigateByUrl(`processes`);
   }
 }

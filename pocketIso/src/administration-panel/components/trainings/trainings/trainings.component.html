@@ -30,9 +30,9 @@
   <ng-container matColumnDef="delete">
     <th mat-header-cell *matHeaderCellDef> Usuń </th>
     <td mat-cell *matCellDef="let element">
-        <button mat-raised-button color="primary" (click)="deleteTraining(element.id)">Usuń</button>
+      <button mat-raised-button color="primary" (click)="deleteTraining(element.id)">Usuń</button>
     </td>
-</ng-container>
+  </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
