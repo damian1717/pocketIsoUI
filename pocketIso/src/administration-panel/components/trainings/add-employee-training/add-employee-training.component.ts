@@ -30,6 +30,7 @@ export class AddEmployeeTrainingComponent implements OnInit {
   trainingDateValue = this.employeeTrainingForm.get('trainingDate');
   skillLevelValue = this.employeeTrainingForm.get('skillLevel');
   id: string | null = '';
+  subProcessType: string | null = '';
   trainingId: string | null = '';
   trainingName: string | undefined;
   employeeId: string | null = '';
@@ -44,6 +45,7 @@ export class AddEmployeeTrainingComponent implements OnInit {
     this.employeeId = this.route.snapshot.paramMap.get('employeeId');
     this.employeeType = this.route.snapshot.paramMap.get('employeeType');
     this.id = this.route.snapshot.paramMap.get('id');
+    this.subProcessType = this.route.snapshot.paramMap.get('type');
 
     this.getEmployeeTrainingInfo(this.id!);
     this.getTrainingInfo();

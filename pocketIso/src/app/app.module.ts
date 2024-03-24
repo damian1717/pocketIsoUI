@@ -44,6 +44,9 @@ import { DisplayQualityPoliciesComponent } from '../users-panel/display-quality-
 import { CommonModule } from '@angular/common';
 import { ConfirmationDialogComponent } from '../common/components/confirmation-dialog/confirmation-dialog.component';
 import { DisplayEmployeeTrainingsComponent } from '../administration-panel/components/trainings/display-employee-trainings/display-employee-trainings.component';
+import { SubProcessesComponent } from '../administration-panel/components/sub-proc/sub-processes/sub-processes.component';
+import { AddSubProcessComponent } from '../administration-panel/components/sub-proc/add-sub-process/add-sub-process.component';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 @NgModule({
   declarations: [
@@ -82,7 +85,9 @@ import { DisplayEmployeeTrainingsComponent } from '../administration-panel/compo
     ChangePasswordDialogComponent,
     DisplayQualityPoliciesComponent,
     ConfirmationDialogComponent,
-    DisplayEmployeeTrainingsComponent
+    DisplayEmployeeTrainingsComponent,
+    SubProcessesComponent,
+    AddSubProcessComponent
   ],
   imports: [
     BrowserModule,
@@ -93,7 +98,8 @@ import { DisplayEmployeeTrainingsComponent } from '../administration-panel/compo
     FormsModule,
     ReactiveFormsModule,
     OrganizationChartModule,
-    CommonModule
+    CommonModule,
+    AngularEditorModule
   ],
   providers: [
     {

@@ -6,6 +6,7 @@ import { QualityPolicyReport } from '../models/quality-policy-report.model';
 import { ChartOrgReport } from '../models/chart-org-report.model';
 import { DefinitionProcessReport } from '../models/definition-process-report.model';
 import { ProcessMap } from '../models/process-map-report.model';
+import { SubProcess } from 'src/administration-panel/models/sub-process.model';
 
 @Injectable({
   providedIn: 'root'
@@ -31,5 +32,9 @@ export class RaportService extends BaseApiService {
 
   public generateProcessMapRaportPdf(request: ProcessMap): Observable<{ filename: string, body: Blob }> {
     return this.downloadFilePost('raport/GenerateProcessMapRaportPdf', request, {}, false);
+  }
+
+  public generateSubProcessRaportPdf(request: SubProcess): Observable<{ filename: string, body: Blob }> {
+    return this.downloadFilePost('raport/GenerateSubProcessRaportPdf', request, {}, false);
   }
 }

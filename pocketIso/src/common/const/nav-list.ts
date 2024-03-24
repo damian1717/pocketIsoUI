@@ -95,6 +95,16 @@ export const NAV_DATA: NavItem[] = [
         name: 'SZKOLENIA - TABELA',
         url: 'display-employee-trainings',
         role: 'admin'
+      },
+      {
+        name: 'PROCEDURY SYSTEMOWE',
+        url: 'sub-processes/1',
+        role: 'admin'
+      },
+      {
+        name: 'INSTRUKCJE SYSTEMOWE',
+        url: 'sub-processes/2',
+        role: 'admin'
       }
     ]
   },
@@ -126,6 +136,16 @@ export const NAV_DATA: NavItem[] = [
   {
     name: 'SCHEMAT ORGANIZACJI',
     url: 'display-organization-chart',
+    role: 'user'
+  },
+  {
+    name: 'PROCEDURY SYSTEMOWE',
+    url: 'sub-processes/1',
+    role: 'user'
+  },
+  {
+    name: 'INSTRUKCJE SYSTEMOWE',
+    url: 'sub-processes/2',
     role: 'user'
   },
   {

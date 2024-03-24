@@ -32,6 +32,8 @@ import { DefineProcessComponent } from '../administration-panel/components/proce
 import { DefineBaseProcessComponent } from '../administration-panel/components/process/define-base-process/define-base-process.component';
 import { ProcessToDisplayComponent } from '../administration-panel/components/process/process-to-display/process-to-display.component';
 import { DisplayQualityPoliciesComponent } from '../users-panel/display-quality-policies/display-quality-policies.component';
+import { AddSubProcessComponent } from '../administration-panel/components/sub-proc/add-sub-process/add-sub-process.component';
+import { SubProcessesComponent } from '../administration-panel/components/sub-proc/sub-processes/sub-processes.component';
 
 const routes: Routes = [
   {
@@ -193,7 +195,22 @@ const routes: Routes = [
           path: 'display-employee-trainings', component: DisplayEmployeeTrainingsComponent, canActivate: [AuthGuard], data: {
             role: Role.Admin
           }
-        }
+        },
+        {
+          path: 'sub-processes/:type', component: SubProcessesComponent, canActivate: [AuthGuard], data: {
+            role: Role.User
+          }
+        },
+        {
+          path: 'add-sub-process/:type', component: AddSubProcessComponent, canActivate: [AuthGuard], data: {
+            role: Role.Admin
+          }
+        },
+        {
+          path: 'add-sub-process/:type/:id', component: AddSubProcessComponent, canActivate: [AuthGuard], data: {
+            role: Role.Admin
+          }
+        },
       ]
   },
   {
