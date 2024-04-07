@@ -14,7 +14,9 @@ export class AddSubProcessComponent implements OnInit {
   id: string | null = '';
   subProcessType: string | null = '';
   model: SubProcess;
+  description: string = '';
   buttonText: string = '';
+  messageText: string = '';
   constructor(private subProcessService: SubProcessService, private route: ActivatedRoute, private router: Router, private snackBar: MatSnackBar) {
     this.model = {} as SubProcess;
   }
@@ -24,8 +26,10 @@ export class AddSubProcessComponent implements OnInit {
 
     if (Number(this.subProcessType) === 1) {
       this.buttonText = ' Procedury';
+      this.messageText = 'Procedura';
     } else {
       this.buttonText = 'Instrukcje';
+      this.messageText = 'Instrukcja';
     }
 
     if (this.id) {
@@ -33,6 +37,7 @@ export class AddSubProcessComponent implements OnInit {
         if (x) {
           this.htmlContent = x.htmlContent;
           this.model = x;
+          this.description = x.description;
         }
       });
     }
@@ -76,13 +81,14 @@ export class AddSubProcessComponent implements OnInit {
   save() {
     if (this.id) {
       this.model.htmlContent = this.htmlContent;
+      this.model.description = this.description;
       this.subProcessService.updateSubProcess(this.model).subscribe(x => {
-        this.displayMessage('Procedura zaktualizowana.');
+        this.displayMessage(`${this.messageText} zaktualizowana.`);
       });
     } else {
-      this.model = { id: '', name: '', htmlContent: this.htmlContent, subProcessType: Number(this.subProcessType) } as SubProcess;
+      this.model = { id: '', name: '', description: this.description, htmlContent: this.htmlContent, subProcessType: Number(this.subProcessType) } as SubProcess;
       this.subProcessService.addSubProcess(this.model).subscribe(x => {
-        this.displayMessage('Procedura dodana.');
+        this.displayMessage(`${this.messageText} dodana.`);
       });
     }
   }

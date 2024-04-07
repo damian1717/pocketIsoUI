@@ -20,8 +20,9 @@ export class SubProcessesComponent implements OnInit {
 
   processes: SubProcess[] = [];
   subProcessType: number | undefined;
-  displayedColumns: string[] = ['name', 'download', 'edit', 'delete'];
+  displayedColumns: string[] = ['code', 'description', 'download', 'edit', 'archive'];
   addButtontext: string = '';
+  role: string = '';
   constructor(private route: ActivatedRoute, private router: Router, private subProcessService: SubProcessService,
     private snackBar: MatSnackBar, public dialog: MatDialog, private saveAsService: SaveAsService, private raport: RaportService,
     private authService: AuthService) { }
@@ -38,12 +39,12 @@ export class SubProcessesComponent implements OnInit {
         this.addButtontext = 'Dodaj Instrukcje';
       }
 
-      const role = this.authService.getRole();
+      this.role = this.authService.getRole();
 
-      if (role === Role.SuperAdmin || role === Role.Admin) {
-        this.displayedColumns = ['name', 'download', 'edit', 'delete'];
+      if (this.role === Role.SuperAdmin || this.role === Role.Admin) {
+        this.displayedColumns = ['code', 'description', 'download', 'edit', 'archive'];
       } else {
-        this.displayedColumns = ['name', 'download'];
+        this.displayedColumns = ['code', 'description', 'download'];
       }
     });
   }
@@ -53,8 +54,16 @@ export class SubProcessesComponent implements OnInit {
 
   getSubProcesses(subProcessType: number) {
     this.subProcessService.getSubProcesses(subProcessType).subscribe(x => {
-      this.processes = x;
-      this.dataSource.data = x;
+      if (this.role === Role.User) {
+        if (x && x.length > 0) {
+          let filteredItems = x.filter(x => !x.isArchive);
+          this.processes = filteredItems;
+          this.dataSource.data = filteredItems;
+        }
+      } else {
+        this.processes = x;
+        this.dataSource.data = x;
+      }
     });
   }
 
@@ -71,21 +80,20 @@ export class SubProcessesComponent implements OnInit {
     this.router.navigateByUrl(`add-sub-process/${this.subProcessType}/${id}`);
   }
 
-  deleteSubProcess(id: string) {
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent, { data: { text: 'Czy napewno chcesz usunąć?' } });
+  archive(element: SubProcess) {
+    if (element) {
+      const dialogRef = this.dialog.open(ConfirmationDialogComponent, { data: { text: 'Czy napewno chcesz zarchiwizować?' } });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.subProcessService.deleteSubProcess(id).subscribe(
-          res => {
-            this.displayMessage('Rekord został usunięty.');
-            this.getSubProcesses(this.subProcessType!);
-          },
-          err => this.displayMessage(err?.message),
-          () => { }
-        );
-      }
-    });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          element.isArchive = true;
+          this.subProcessService.updateSubProcess(element)
+            .subscribe(x => {
+              this.displayMessage('Zarchiwizowano.');
+            })
+        }
+      })
+    }
   }
 
   displayMessage(message: string) {

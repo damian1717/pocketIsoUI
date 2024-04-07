@@ -10,9 +10,14 @@
 
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Nazwa </th>
+    <ng-container matColumnDef="code">
+      <th mat-header-cell *matHeaderCellDef> Kod </th>
       <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef> Nazwa </th>
+      <td mat-cell *matCellDef="let element"> {{element.description}} </td>
     </ng-container>
 
     <ng-container matColumnDef="download">
@@ -27,16 +32,18 @@
     <ng-container matColumnDef="edit">
       <th mat-header-cell *matHeaderCellDef> Edycja </th>
       <td mat-cell *matCellDef="let element">
-        <button mat-raised-button color="primary"
+        <button *ngIf="!element.isArchive" mat-raised-button color="primary"
           (click)="editSubProcess(element.id)">Edycja</button>
+          <span *ngIf="element.isArchive"></span>
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="delete">
-      <th mat-header-cell *matHeaderCellDef> Usuń </th>
+    <ng-container matColumnDef="archive">
+      <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element">
-        <button mat-raised-button color="primary"
-          (click)="deleteSubProcess(element.id)">Usuń</button>
+        <button *ngIf="!element.isArchive" mat-raised-button color="primary"
+          (click)="archive(element)">Archiwizuj</button>
+        <span *ngIf="element.isArchive">Zarchiwizowana</span>
       </td>
     </ng-container>
 
