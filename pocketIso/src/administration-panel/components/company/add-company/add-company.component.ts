@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { CompanyService } from '../../../services/company.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Company } from 'src/administration-panel/models/company.model';
 
@@ -30,7 +30,8 @@ export class AddCompanyComponent implements OnInit {
     strengths: new FormControl(''),
     weaknesses: new FormControl(''),
     opportunitiesForTheCompany: new FormControl(''),
-    threatsToTheCompany: new FormControl('')
+    threatsToTheCompany: new FormControl(''),
+    contactDetails: new FormControl('')
   });
 
   nameValue = this.companyForm.get('name');
@@ -38,15 +39,15 @@ export class AddCompanyComponent implements OnInit {
   directorValue = this.companyForm.get('director');
   nipValue = this.companyForm.get('nip');
   id: string | null = '';
-  buttonSubmitText = 'Dodaj organizacje';
   codeDisabled = false;
-  constructor(private companyService: CompanyService, private route: ActivatedRoute, private snackBar: MatSnackBar) { }
+  constructor(private companyService: CompanyService, private route: ActivatedRoute, private snackBar: MatSnackBar
+    , private router: Router
+  ) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
     if (this.id) {
       this.getCompany(this.id);
-      this.buttonSubmitText = 'Edytuj organizacje';
       this.codeDisabled = true;
     }
   }
@@ -71,7 +72,8 @@ export class AddCompanyComponent implements OnInit {
         strengths: x.strengths,
         weaknesses: x.weaknesses,
         opportunitiesForTheCompany: x.opportunitiesForTheCompany,
-        threatsToTheCompany: x.threatsToTheCompany
+        threatsToTheCompany: x.threatsToTheCompany,
+        contactDetails: x.contactDetails
       });
     })
   }
@@ -99,5 +101,9 @@ export class AddCompanyComponent implements OnInit {
   resetCompanyForm(formDirective: FormGroupDirective) {
     formDirective.resetForm();
     this.companyForm.reset();
+  }
+
+  redirectToCompanies() {
+    this.router.navigateByUrl(`companies-list`);
   }
 }

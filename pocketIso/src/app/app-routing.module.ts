@@ -34,6 +34,7 @@ import { ProcessToDisplayComponent } from '../administration-panel/components/pr
 import { DisplayQualityPoliciesComponent } from '../users-panel/display-quality-policies/display-quality-policies.component';
 import { AddSubProcessComponent } from '../administration-panel/components/sub-proc/add-sub-process/add-sub-process.component';
 import { SubProcessesComponent } from '../administration-panel/components/sub-proc/sub-processes/sub-processes.component';
+import { AddOrganizationalContextComponent } from '../administration-panel/components/organizational-context/add-organizational-context/add-organizational-context.component';
 
 const routes: Routes = [
   {
@@ -211,6 +212,12 @@ const routes: Routes = [
             role: Role.Admin
           }
         },
+        {
+          path: 'organizational-context', component: AddOrganizationalContextComponent, canActivate: [AuthGuard], data: {
+            role: Role.Admin
+          }
+        },
+        
       ]
   },
   {

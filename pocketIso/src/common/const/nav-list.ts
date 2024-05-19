@@ -12,13 +12,18 @@ export const NAV_DATA: NavItem[] = [
         role: 'su'
       },
       {
-        name: 'DODAJ FIRME',
+        name: 'DODAJ FIRMĘ',
         url: 'add-company/',
         role: 'su'
       },
       {
         name: 'LISTA UŻYTKOWNIKÓW',
         url: 'users/',
+        role: 'admin'
+      },
+      {
+        name: 'KONTEKST ORGANIZACJI',
+        url: 'organizational-context/',
         role: 'admin'
       },
       {

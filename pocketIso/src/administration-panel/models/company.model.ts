@@ -18,6 +18,7 @@ export interface Company {
     weaknesses?: string;
     opportunitiesForTheCompany?: string;
     threatsToTheCompany?: string;
+    contactDetails?: string;
     isArchive: boolean;
   }
   

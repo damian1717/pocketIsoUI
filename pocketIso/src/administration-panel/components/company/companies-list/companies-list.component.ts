@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from 'src/common/components/confirmation-dialog/confirmation-dialog.component';
+import { CompanyOverviewComponent } from '../company-overview/company-overview.component';
 
 @Component({
   selector: 'app-companies-list',
@@ -22,7 +23,7 @@ export class CompaniesListComponent implements OnInit {
   }
 
   displayedColumns: string[] =
-    ['name', 'director', 'nip', 'city', 'postalCode', 'street', 'edit', 'archive'];
+    ['name', 'director', 'nip', 'contactDetails', 'overview', 'edit', 'archive'];
   dataSource = new MatTableDataSource(this.companies);
 
   applyFilter(event: Event) {
@@ -59,5 +60,12 @@ export class CompaniesListComponent implements OnInit {
 
   displayMessage(message: string) {
     this.snackBar.open(message, '', { duration: 1500 });
+  }
+
+  redirectToOverviewCompany(id: string): void {
+    this.dialog.open(CompanyOverviewComponent, {
+      width: '500px',
+      data: id
+    });
   }
 }

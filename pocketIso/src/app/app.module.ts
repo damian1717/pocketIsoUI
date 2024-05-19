@@ -47,6 +47,7 @@ import { DisplayEmployeeTrainingsComponent } from '../administration-panel/compo
 import { SubProcessesComponent } from '../administration-panel/components/sub-proc/sub-processes/sub-processes.component';
 import { AddSubProcessComponent } from '../administration-panel/components/sub-proc/add-sub-process/add-sub-process.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { AddOrganizationalContextComponent } from '../administration-panel/components/organizational-context/add-organizational-context/add-organizational-context.component';
 
 @NgModule({
   declarations: [
@@ -87,7 +88,8 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     ConfirmationDialogComponent,
     DisplayEmployeeTrainingsComponent,
     SubProcessesComponent,
-    AddSubProcessComponent
+    AddSubProcessComponent,
+    AddOrganizationalContextComponent
   ],
   imports: [
     BrowserModule,

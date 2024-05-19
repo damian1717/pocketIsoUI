@@ -93,8 +93,9 @@
       <div fxLayout="column" fxFlex.gt-sm="33%" fxFlex.sm="50%" fxFlex.xs="100%" fxFlexOrder="10" fxFlexOrder.sm="10"
         fxFlexOrder.xs="10">
         <mat-form-field appearance="fill" tabindex="10">
-          <mat-label for="knowHow">Know-how</mat-label>
-          <input matInput id="knowHow" type="text" formControlName="knowHow">
+          <mat-label for="name">Know-how</mat-label>
+          <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="5"
+            cdkAutosizeMaxRows="50" id="knowHow" type="text" formControlName="knowHow"></textarea>
         </mat-form-field>
       </div>
 
@@ -102,7 +103,8 @@
         fxFlexOrder.xs="11">
         <mat-form-field appearance="fill" tabindex="11">
           <mat-label for="itemsCompany">Cel i strategię działania firmy</mat-label>
-          <input matInput id="itemsCompany" type="text" formControlName="itemsCompany">
+          <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="5"
+            cdkAutosizeMaxRows="50" id="itemsCompany" type="text" formControlName="itemsCompany"></textarea>
         </mat-form-field>
       </div>
 
@@ -110,7 +112,8 @@
         fxFlexOrder.xs="12">
         <mat-form-field appearance="fill" tabindex="12">
           <mat-label for="technologiesUsed">Zastosowane technologie</mat-label>
-          <input matInput id="technologiesUsed" type="text" formControlName="technologiesUsed">
+          <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="5"
+            cdkAutosizeMaxRows="50" id="technologiesUsed" type="text" formControlName="technologiesUsed"></textarea>
         </mat-form-field>
       </div>
 
@@ -118,7 +121,9 @@
         fxFlexOrder.xs="12">
         <mat-form-field appearance="fill" tabindex="13">
           <mat-label for="communicationSystem">System komunikacji</mat-label>
-          <input matInput id="communicationSystem" type="text" formControlName="communicationSystem">
+          <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="5"
+            cdkAutosizeMaxRows="50" id="communicationSystem" type="text"
+            formControlName="communicationSystem"></textarea>
         </mat-form-field>
       </div>
 
@@ -126,7 +131,8 @@
         fxFlexOrder.xs="14">
         <mat-form-field appearance="fill" tabindex="14">
           <mat-label for="strengths">Silne strony</mat-label>
-          <input matInput id="strengths" type="text" formControlName="strengths">
+          <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="5"
+            cdkAutosizeMaxRows="50" id="strengths" type="text" formControlName="strengths"></textarea>
         </mat-form-field>
       </div>
 
@@ -134,7 +140,8 @@
         fxFlexOrder.xs="15">
         <mat-form-field appearance="fill" tabindex="15">
           <mat-label for="weaknesses">Słabe strony</mat-label>
-          <input matInput id="weaknesses" type="text" formControlName="weaknesses">
+          <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="5"
+            cdkAutosizeMaxRows="50" id="weaknesses" type="text" formControlName="weaknesses"></textarea>
         </mat-form-field>
       </div>
 
@@ -142,7 +149,9 @@
         fxFlexOrder.xs="16">
         <mat-form-field appearance="fill" tabindex="16">
           <mat-label for="opportunitiesForTheCompany">Szanse dla firmy</mat-label>
-          <input matInput id="opportunitiesForTheCompany" type="text" formControlName="opportunitiesForTheCompany">
+          <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="5"
+            cdkAutosizeMaxRows="50" id="opportunitiesForTheCompany" type="text"
+            formControlName="opportunitiesForTheCompany"></textarea>
         </mat-form-field>
       </div>
 
@@ -150,10 +159,22 @@
         fxFlexOrder.xs="17">
         <mat-form-field appearance="fill" tabindex="17">
           <mat-label for="threatsToTheCompany">Zagrożenia dla firmy</mat-label>
-          <input matInput id="threatsToTheCompany" type="text" formControlName="threatsToTheCompany">
+          <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="5"
+            cdkAutosizeMaxRows="50" id="threatsToTheCompany" type="text"
+            formControlName="threatsToTheCompany"></textarea>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="column" fxFlex.gt-sm="33%" fxFlex.sm="50%" fxFlex.xs="100%" fxFlexOrder="17" fxFlexOrder.sm="17"
+        fxFlexOrder.xs="17">
+        <mat-form-field appearance="fill" tabindex="17">
+          <mat-label for="contactDetails">Dane kontaktowe</mat-label>
+          <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="5"
+            cdkAutosizeMaxRows="50" id="contactDetails" type="text" formControlName="contactDetails"></textarea>
         </mat-form-field>
       </div>
     </div>
-    <button mat-raised-button color="primary" type="submit" class="add-company">{{ buttonSubmitText }}</button>
+    <button mat-raised-button style="margin-right: 20px;" (click)="redirectToCompanies()">Firmy</button>
+    <button mat-raised-button color="primary" type="submit" class="add-company">Zapisz</button>
   </form>
 </div>

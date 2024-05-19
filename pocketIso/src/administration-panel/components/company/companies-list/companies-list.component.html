@@ -20,21 +20,18 @@
     <td mat-cell *matCellDef="let element"> {{element.nip}} </td>
   </ng-container>
 
-  <ng-container matColumnDef="city">
-    <th mat-header-cell *matHeaderCellDef> Miasto </th>
-    <td mat-cell *matCellDef="let element"> {{element.city}} </td>
+  <ng-container matColumnDef="contactDetails">
+    <th mat-header-cell *matHeaderCellDef> Dane kontaktowe </th>
+    <td mat-cell *matCellDef="let element"> {{element.contactDetails}} </td>
   </ng-container>
-
-  <ng-container matColumnDef="postalCode">
-    <th mat-header-cell *matHeaderCellDef> Kod pocztowy </th>
-    <td mat-cell *matCellDef="let element"> {{element.postalCode}} </td>
+  
+  <ng-container matColumnDef="overview">
+    <th mat-header-cell *matHeaderCellDef> Podglad </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-raised-button color="primary"
+        (click)="redirectToOverviewCompany(element.id)">Podglad</button>
+    </td>
   </ng-container>
-
-  <ng-container matColumnDef="street">
-    <th mat-header-cell *matHeaderCellDef> Ulica </th>
-    <td mat-cell *matCellDef="let element"> {{element.street}} </td>
-  </ng-container>
-
   <ng-container matColumnDef="edit">
     <th mat-header-cell *matHeaderCellDef> Edycja </th>
     <td mat-cell *matCellDef="let element">
