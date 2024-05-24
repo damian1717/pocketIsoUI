@@ -40,8 +40,8 @@ export class AddCompanyComponent implements OnInit {
   nipValue = this.companyForm.get('nip');
   id: string | null = '';
   codeDisabled = false;
-  constructor(private companyService: CompanyService, private route: ActivatedRoute, private snackBar: MatSnackBar
-    , private router: Router
+  constructor(private companyService: CompanyService, private route: ActivatedRoute, private snackBar: MatSnackBar,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -77,6 +77,7 @@ export class AddCompanyComponent implements OnInit {
       });
     })
   }
+
   onSubmit(formDirective: FormGroupDirective) {
     if (this.companyForm.valid) {
       if (this.id) {

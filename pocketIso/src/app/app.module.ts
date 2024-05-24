@@ -48,6 +48,7 @@ import { SubProcessesComponent } from '../administration-panel/components/sub-pr
 import { AddSubProcessComponent } from '../administration-panel/components/sub-proc/add-sub-process/add-sub-process.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { AddOrganizationalContextComponent } from '../administration-panel/components/organizational-context/add-organizational-context/add-organizational-context.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -101,7 +102,8 @@ import { AddOrganizationalContextComponent } from '../administration-panel/compo
     ReactiveFormsModule,
     OrganizationChartModule,
     CommonModule,
-    AngularEditorModule
+    AngularEditorModule,
+    FlexLayoutModule
   ],
   providers: [
     {

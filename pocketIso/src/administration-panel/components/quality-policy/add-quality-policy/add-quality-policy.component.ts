@@ -40,6 +40,7 @@ export class AddQualityPolicyComponent implements OnInit {
       });
     })
   }
+  
   onSubmit() {
     if (this.qualityPolicyForm.valid) {
       if (this.id) {

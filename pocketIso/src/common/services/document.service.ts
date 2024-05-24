@@ -18,6 +18,10 @@ export class DocumentService extends BaseApiService {
     return this.getAsync<DocumentInfo[]>(`document/GetDocumentsByCode?code=${code}`);
   }
 
+  public getAllDocumentsByCodeAndUserId(code: string): Observable<DocumentInfo[]> {
+    return this.getAsync<DocumentInfo[]>(`document/GetAllDocumentsByCodeAndUserId?code=${code}`);
+  }
+
   public downloadFileById(id: string): Observable<{ filename: string, body: Blob }> {
     return this.downloadFilePost(`document/DownloadPdf?id=${id}`, null, {}, false);
   }

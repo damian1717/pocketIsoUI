@@ -6,7 +6,8 @@ import { QualityPolicyReport } from '../models/quality-policy-report.model';
 import { ChartOrgReport } from '../models/chart-org-report.model';
 import { DefinitionProcessReport } from '../models/definition-process-report.model';
 import { ProcessMap } from '../models/process-map-report.model';
-import { SubProcess } from 'src/administration-panel/models/sub-process.model';
+import { SubProcess } from '../../administration-panel/models/sub-process.model';
+import { OrganizationalContext } from '../../administration-panel/models/organizational-context.model';
 
 @Injectable({
   providedIn: 'root'
@@ -36,5 +37,9 @@ export class RaportService extends BaseApiService {
 
   public generateSubProcessRaportPdf(request: SubProcess): Observable<{ filename: string, body: Blob }> {
     return this.downloadFilePost('raport/GenerateSubProcessRaportPdf', request, {}, false);
+  }
+
+  public generateOrganizationalContextRaportPdf(request: OrganizationalContext): Observable<{ filename: string, body: Blob }> {
+    return this.downloadFilePost('raport/GenerateOrganizationalContextRaportPdf', request, {}, false);
   }
 }

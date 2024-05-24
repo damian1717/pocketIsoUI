@@ -2,12 +2,11 @@
   <p class="header-name">Szkolenie</p>
 
   <form [formGroup]="trainingForm" fxLayout="column" (ngSubmit)="onSubmit()">
-    <div fxLayout="column" fxLayoutGap="20px grid" fxLayoutAlign="center center">
+    <div fxLayout="column">
 
       <input hidden matInput id="id" type="text" formControlName="id">
 
-      <div fxLayout="column" fxFlex.gt-sm="100%" fxFlex.sm="100%" fxFlex.xs="100%" fxFlexOrder="1" fxFlexOrder.sm="1"
-        fxFlexOrder.xs="1">
+      <div fxLayout="row" fxLayoutAlign="center center">
         <mat-form-field appearance="fill" tabindex="1">
           <mat-label for="name">Nazwa</mat-label>
           <input matInput id="name" type="text" formControlName="name">
@@ -17,8 +16,7 @@
         </mat-form-field>
       </div>
 
-      <div fxLayout="column" fxFlex.gt-sm="100%" fxFlex.sm="100%" fxFlex.xs="100%" fxFlexOrder="2" fxFlexOrder.sm="2"
-        fxFlexOrder.xs="2">
+      <div fxLayout="row" fxLayoutAlign="center center">
         <mat-form-field appearance="fill" tabindex="2">
           <mat-label for="forHowManyMonths">Częstotliwość szkolenia (Co ile miesięcy)</mat-label>
           <mat-select formControlName="forHowManyMonths" name="forHowManyMonths">
@@ -32,8 +30,7 @@
         </mat-form-field>
       </div>
 
-      <div fxLayout="column" fxFlex.gt-sm="100%" fxFlex.sm="100%" fxFlex.xs="100%" fxFlexOrder="3" fxFlexOrder.sm="3"
-        fxFlexOrder.xs="3">
+      <div fxLayout="row" fxLayoutAlign="center center">
         <mat-form-field appearance="fill" tabindex="3">
           <mat-label for="level">Przypisz szkolenie do stanowiska</mat-label>
           <mat-select formControlName="level" name="level">
@@ -50,8 +47,11 @@
         </mat-form-field>
       </div>
 
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <button mat-raised-button style="margin-right: 20px;" (click)="redirectToTrainings()">Szkolenia</button>
+        <button mat-raised-button color="primary" type="submit">Zapisz</button>
+      </div>
+
     </div>
-    <button mat-raised-button style="margin-right: 20px;" (click)="redirectToTrainings()">Szkolenia</button>
-    <button mat-raised-button color="primary" type="submit">Zapisz</button>
   </form>
 </div>
