@@ -16,8 +16,11 @@
             <input matInput id="industry" type="text" formControlName="industry">
           </mat-form-field>
         </div>
+      </div>
 
-        <div fxLayout="column" fxFlex.gt-sm="20%" fxFlex.sm="50%" fxFlex.xs="100%" fxFlexOrder="2" fxFlexOrder.sm="2"
+      <div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="20px">
+
+        <div fxLayout="column" fxFlex.gt-sm="90%" fxFlex.sm="90%" fxFlex.xs="100%" fxFlexOrder="2" fxFlexOrder.sm="2"
           fxFlexOrder.xs="2">
           <mat-form-field appearance="fill" tabindex="2">
             <mat-label for="factorsTechnologicalEnvironment">Czynniki z otoczenia prawnego, technologicznego,
@@ -29,7 +32,11 @@
           </mat-form-field>
         </div>
 
-        <div fxLayout="column" fxFlex.gt-sm="20%" fxFlex.sm="50%" fxFlex.xs="100%" fxFlexOrder="3" fxFlexOrder.sm="3"
+      </div>
+
+      <div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="20px">
+
+        <div fxLayout="column" fxFlex.gt-sm="90%" fxFlex.sm="90%" fxFlex.xs="100%" fxFlexOrder="3" fxFlexOrder.sm="3"
           fxFlexOrder.xs="3">
           <mat-form-field appearance="fill" tabindex="3">
             <mat-label for="factorsRelatedToValuesCulture">Czynniki związane z wartościami, kulturą, wiedzą i działaniem
@@ -39,8 +46,11 @@
               formControlName="factorsRelatedToValuesCulture"></textarea>
           </mat-form-field>
         </div>
+      </div>
 
-        <div fxLayout="column" fxFlex.gt-sm="20%" fxFlex.sm="50%" fxFlex.xs="100%" fxFlexOrder="4" fxFlexOrder.sm="4"
+      <div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="20px">
+
+        <div fxLayout="column" fxFlex.gt-sm="90%" fxFlex.sm="90%" fxFlex.xs="100%" fxFlexOrder="4" fxFlexOrder.sm="4"
           fxFlexOrder.xs="4">
           <mat-form-field appearance="fill" tabindex="4">
             <mat-label for="externalAndInternalEntities">Wszystkie podmioty zewnętrzne i wewnętrzne, które wpływają lub
@@ -55,7 +65,7 @@
 
       <div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="20px">
 
-        <div fxLayout="column" fxFlex.gt-sm="20%" fxFlex.sm="50%" fxFlex.xs="100%" fxFlexOrder="1" fxFlexOrder.sm="1"
+        <div fxLayout="column" fxFlex.gt-sm="90%" fxFlex.sm="90%" fxFlex.xs="100%" fxFlexOrder="1" fxFlexOrder.sm="1"
           fxFlexOrder.xs="1">
           <mat-form-field appearance="fill" tabindex="5">
             <mat-label for="strengths">Silne strony</mat-label>
@@ -63,8 +73,11 @@
               cdkAutosizeMaxRows="50" id="strengths" type="text" formControlName="strengths"></textarea>
           </mat-form-field>
         </div>
+      </div>
 
-        <div fxLayout="column" fxFlex.gt-sm="20%" fxFlex.sm="50%" fxFlex.xs="100%" fxFlexOrder="2" fxFlexOrder.sm="2"
+      <div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="20px">
+
+        <div fxLayout="column" fxFlex.gt-sm="90%" fxFlex.sm="90%" fxFlex.xs="100%" fxFlexOrder="2" fxFlexOrder.sm="2"
           fxFlexOrder.xs="2">
           <mat-form-field appearance="fill" tabindex="6">
             <mat-label for="weaknesses">Słabe strony</mat-label>
@@ -73,7 +86,11 @@
           </mat-form-field>
         </div>
 
-        <div fxLayout="column" fxFlex.gt-sm="20%" fxFlex.sm="50%" fxFlex.xs="100%" fxFlexOrder="3" fxFlexOrder.sm="3"
+      </div>
+
+      <div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="20px">
+
+        <div fxLayout="column" fxFlex.gt-sm="90%" fxFlex.sm="90%" fxFlex.xs="100%" fxFlexOrder="3" fxFlexOrder.sm="3"
           fxFlexOrder.xs="3">
           <mat-form-field appearance="fill" tabindex="7">
             <mat-label for="chances">Szanse</mat-label>
@@ -82,7 +99,11 @@
           </mat-form-field>
         </div>
 
-        <div fxLayout="column" fxFlex.gt-sm="20%" fxFlex.sm="50%" fxFlex.xs="100%" fxFlexOrder="4" fxFlexOrder.sm="4"
+      </div>
+
+      <div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="20px">
+
+        <div fxLayout="column" fxFlex.gt-sm="90%" fxFlex.sm="90%" fxFlex.xs="100%" fxFlexOrder="4" fxFlexOrder.sm="4"
           fxFlexOrder.xs="4">
           <mat-form-field appearance="fill" tabindex="8">
             <mat-label for="threats">Zagrożenia</mat-label>
@@ -90,45 +111,44 @@
               cdkAutosizeMaxRows="50" id="threats" type="text" formControlName="threats"></textarea>
           </mat-form-field>
         </div>
-
       </div>
 
-      <div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="20px">
-        <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" formControlName="norm"
-          (change)="handleRadiButtonChange($event)">
-          @for (norm of norms; track norm) {
-          <mat-radio-button class="example-radio-button" [value]="norm.id">{{norm.name}}</mat-radio-button>
-          }
-        </mat-radio-group>
+    </div>
+
+    <div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="20px">
+      <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" formControlName="norm"
+        (change)="handleRadiButtonChange($event)">
+        @for (norm of norms; track norm) {
+        <mat-radio-button class="example-radio-button" [value]="norm.id">{{norm.name}}</mat-radio-button>
+        }
+      </mat-radio-group>
+    </div>
+
+    <div *ngIf="showAdditionalNormFields" fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="20px">
+
+      <div fxLayout="column" fxFlex.gt-sm="45%" fxFlex.sm="50%" fxFlex.xs="100%" fxFlexOrder="1" fxFlexOrder.sm="1"
+        fxFlexOrder.xs="1">
+        <mat-form-field appearance="fill" tabindex="9">
+          <mat-label for="numberNorm">Numer punktu z normy ISO</mat-label>
+          <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="5"
+            cdkAutosizeMaxRows="50" id="numberNorm" type="text" formControlName="numberNorm"></textarea>
+        </mat-form-field>
       </div>
 
-      <div *ngIf="showAdditionalNormFields" fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="20px">
-
-        <div fxLayout="column" fxFlex.gt-sm="20%" fxFlex.sm="50%" fxFlex.xs="100%" fxFlexOrder="1" fxFlexOrder.sm="1"
-          fxFlexOrder.xs="1">
-          <mat-form-field appearance="fill" tabindex="9">
-            <mat-label for="numberNorm">Numer punktu z normy ISO</mat-label>
-            <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="5"
-              cdkAutosizeMaxRows="50" id="numberNorm" type="text" formControlName="numberNorm"></textarea>
-          </mat-form-field>
-        </div>
-
-        <div fxLayout="column" fxFlex.gt-sm="20%" fxFlex.sm="50%" fxFlex.xs="100%" fxFlexOrder="2" fxFlexOrder.sm="2"
-          fxFlexOrder.xs="2">
-          <mat-form-field appearance="fill" tabindex="10">
-            <mat-label for="normJustification">Uzasadnienie nie stosowania punktu</mat-label>
-            <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="5"
-              cdkAutosizeMaxRows="50" id="normJustification" type="text" formControlName="normJustification"></textarea>
-          </mat-form-field>
-        </div>
-
+      <div fxLayout="column" fxFlex.gt-sm="45%" fxFlex.sm="50%" fxFlex.xs="100%" fxFlexOrder="2" fxFlexOrder.sm="2"
+        fxFlexOrder.xs="2">
+        <mat-form-field appearance="fill" tabindex="10">
+          <mat-label for="normJustification">Uzasadnienie nie stosowania punktu</mat-label>
+          <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="5"
+            cdkAutosizeMaxRows="50" id="normJustification" type="text" formControlName="normJustification"></textarea>
+        </mat-form-field>
       </div>
 
-      <div fxLayout="row" fxLayoutAlign="center center">
-        <button mat-raised-button color="primary" style="margin-right: 20px;" type="submit">Zapisz</button>
-        <button mat-raised-button color="primary" type="button" (click)="generateReport()">Utwórz Raport</button>
-      </div>
+    </div>
 
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <button mat-raised-button color="primary" style="margin-right: 20px;" type="submit">Zapisz</button>
+      <button mat-raised-button color="primary" type="button" (click)="generateReport()">Utwórz Raport</button>
     </div>
 
   </form>
@@ -137,9 +157,9 @@
 <div *ngIf="documents && documents.length > 0" style="margin: auto; width: 50%; padding-top: 70px;">
   <p>Lista utworzonych dokumentów:</p>
   <mat-list>
-      <mat-list-item *ngFor="let document of documents">
-          <div matListItemTitle style="padding-right: 20px;">{{document.name}}</div>
-          <mat-icon matListItemIcon (click)="downloadDocumnet(document.id)">download</mat-icon>
-      </mat-list-item>
+    <mat-list-item *ngFor="let document of documents">
+      <div matListItemTitle style="padding-right: 20px;">{{document.name}}</div>
+      <mat-icon matListItemIcon (click)="downloadDocumnet(document.id)">download</mat-icon>
+    </mat-list-item>
   </mat-list>
 </div>

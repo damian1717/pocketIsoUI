@@ -49,6 +49,8 @@ import { AddSubProcessComponent } from '../administration-panel/components/sub-p
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { AddOrganizationalContextComponent } from '../administration-panel/components/organizational-context/add-organizational-context/add-organizational-context.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { AddDeviceComponent } from '../administration-panel/components/devices/add-device/add-device.component';
+import { DevicesComponent } from '../administration-panel/components/devices/devices/devices.component';
 
 @NgModule({
   declarations: [
@@ -90,7 +92,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     DisplayEmployeeTrainingsComponent,
     SubProcessesComponent,
     AddSubProcessComponent,
-    AddOrganizationalContextComponent
+    AddOrganizationalContextComponent,
+    AddDeviceComponent,
+    DevicesComponent
   ],
   imports: [
     BrowserModule,

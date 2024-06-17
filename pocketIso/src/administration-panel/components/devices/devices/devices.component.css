@@ -1,0 +1,19 @@
+table {
+    width: 100%;
+}
+
+.mat-mdc-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+
+.table-content {
+    padding-top: 50px;
+}
+.after_term {
+    color: red;
+  }
+  
+  .before_term {
+    color: yellow;
+  }

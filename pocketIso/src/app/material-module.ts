@@ -19,8 +19,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { DateAdapter, MatNativeDateModule, NativeDateAdapter } from '@angular/material/core';
-import { MatTooltipModule} from '@angular/material/tooltip';
-import {MatRadioModule} from '@angular/material/radio';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   exports: [

@@ -35,6 +35,8 @@ import { DisplayQualityPoliciesComponent } from '../users-panel/display-quality-
 import { AddSubProcessComponent } from '../administration-panel/components/sub-proc/add-sub-process/add-sub-process.component';
 import { SubProcessesComponent } from '../administration-panel/components/sub-proc/sub-processes/sub-processes.component';
 import { AddOrganizationalContextComponent } from '../administration-panel/components/organizational-context/add-organizational-context/add-organizational-context.component';
+import { DevicesComponent } from '../administration-panel/components/devices/devices/devices.component';
+import { AddDeviceComponent } from '../administration-panel/components/devices/add-device/add-device.component';
 
 const routes: Routes = [
   {
@@ -217,6 +219,22 @@ const routes: Routes = [
             role: Role.Admin
           }
         },
+        {
+          path: 'devices', component: DevicesComponent, canActivate: [AuthGuard], data: {
+            role: Role.Admin
+          }
+        },
+        {
+          path: 'add-device', component: AddDeviceComponent, canActivate: [AuthGuard], data: {
+            role: Role.Admin
+          }
+        },
+        {
+          path: 'add-device/:id', component: AddDeviceComponent, canActivate: [AuthGuard], data: {
+            role: Role.Admin
+          }
+        },
+        
         
       ]
   },

@@ -110,7 +110,12 @@ export const NAV_DATA: NavItem[] = [
         name: 'INSTRUKCJE SYSTEMOWE',
         url: 'sub-processes/2',
         role: 'admin'
-      }
+      },
+      {
+        name: 'REJESTR URZĄDZEŃ',
+        url: 'devices',
+        role: 'admin'
+      },
     ]
   },
   {
