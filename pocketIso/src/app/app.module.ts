@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { OrganizationChartModule } from 'primeng/organizationchart';
 import { AppRoutingModule } from './app-routing.module';
@@ -51,6 +51,11 @@ import { AddOrganizationalContextComponent } from '../administration-panel/compo
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AddDeviceComponent } from '../administration-panel/components/devices/add-device/add-device.component';
 import { DevicesComponent } from '../administration-panel/components/devices/devices/devices.component';
+
+import localePl from '@angular/common/locales/pl';
+import localePlExtra from '@angular/common/locales/extra/pl';
+import { registerLocaleData, DecimalPipe, CurrencyPipe} from '@angular/common';
+registerLocaleData(localePl, 'pl-PL', localePlExtra);
 
 @NgModule({
   declarations: [
@@ -110,6 +115,10 @@ import { DevicesComponent } from '../administration-panel/components/devices/dev
     FlexLayoutModule
   ],
   providers: [
+    {
+      provide: LOCALE_ID,
+      useValue: "pl-PL"
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,
