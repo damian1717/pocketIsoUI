@@ -37,6 +37,7 @@ import { SubProcessesComponent } from '../administration-panel/components/sub-pr
 import { AddOrganizationalContextComponent } from '../administration-panel/components/organizational-context/add-organizational-context/add-organizational-context.component';
 import { DevicesComponent } from '../administration-panel/components/devices/devices/devices.component';
 import { AddDeviceComponent } from '../administration-panel/components/devices/add-device/add-device.component';
+import { RiskAnalysisComponent } from '../administration-panel/components/risk-analysis/risk-analysis/risk-analysis.component';
 
 const routes: Routes = [
   {
@@ -234,8 +235,13 @@ const routes: Routes = [
             role: Role.Admin
           }
         },
+        {
+          path: 'risk-analysis/:processId', component: RiskAnalysisComponent, canActivate: [AuthGuard], data: {
+            role: Role.Admin
+          }
+        },
         
-        
+
       ]
   },
   {

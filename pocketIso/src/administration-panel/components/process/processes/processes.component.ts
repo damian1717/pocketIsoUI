@@ -38,11 +38,11 @@ export class ProcessesComponent implements OnInit {
 
     if (role === Role.SuperAdmin) {
       this.getProcessesForSuperAdmin();
-      this.displayedColumns = ['name', 'basic', 'edit', 'company', 'defineprocess'];
+      this.displayedColumns = ['name', 'basic', 'edit', 'company', 'defineprocess', 'riskAnalysis'];
       this.showCompanyName = true;
     } else {
       this.getProcesses();
-      this.displayedColumns = ['name', 'basic', 'edit', 'defineprocess'];
+      this.displayedColumns = ['name', 'basic', 'edit', 'defineprocess', 'riskAnalysis'];
       this.showCompanyName = false;
     }
   }
@@ -98,6 +98,10 @@ export class ProcessesComponent implements OnInit {
 
   redirectToDefineProcess(id: string): void {
     this.router.navigateByUrl(`define-process/${id}`);
+  }
+
+  redirectToRiskAnalysis(processId: string) {
+     this.router.navigateByUrl(`risk-analysis/${processId}`);
   }
 
   private getDocuments() {

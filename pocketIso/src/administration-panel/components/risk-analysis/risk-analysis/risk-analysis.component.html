@@ -1,0 +1,286 @@
+<div fxLayout="column" fxLayoutAlign="start start">
+
+  <div fxLayout="row">
+    <h3>Nazwa procesu: {{ processName }}</h3>
+  </div>
+
+  <div fxLayout="row">
+
+    <h3>Imię i nazwisko właściciela procesu: </h3>
+
+    <mat-form-field class="example-form-field">
+      <mat-label>Imię i nazwisko</mat-label>
+      <input matInput type="text" [(ngModel)]="ownerOfProcess">
+    </mat-form-field>
+  </div>
+</div>
+
+<div style="padding-bottom: 20px;">
+  <button mat-raised-button color="primary" (click)="openLegend()">Legenda</button>
+  <button mat-raised-button color="primary" style="margin-left: 20px;" (click)="openCriteria()">Kryteria Oceny</button>
+</div>
+
+<mat-vertical-stepper [linear]="true" #stepper [animationDuration]="duration" (selectionChange)="setIndex($event)">
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Wpisz dane</ng-template>
+
+      <div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="20px">
+
+        <div fxLayout="column" fxFlex.gt-sm="20%" fxFlex.sm="50%" fxFlex.xs="100%" fxFlexOrder="1" fxFlexOrder.sm="1"
+          fxFlexOrder.xs="1">
+          <mat-form-field appearance="fill" tabindex="1">
+            <mat-label>Rodzaj</mat-label>
+            <mat-select id="processType" type="text" formControlName="processType" name="processType"
+              (selectionChange)="onChangeProcesType($event)">
+              <mat-option *ngFor="let process of processTypes" [value]="process.value">
+                {{process.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+      </div>
+
+      <div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="20px">
+        <div fxLayout="column" fxFlex.gt-sm="41%" fxFlex.sm="50%" fxFlex.xs="100%" fxFlexOrder="2" fxFlexOrder.sm="2"
+          fxFlexOrder.xs="2">
+          <mat-form-field appearance="fill">
+            <mat-label for="name">Zdefiniowane {{ text }}</mat-label>
+            <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="5"
+              cdkAutosizeMaxRows="10" id="definedIssue" type="text" formControlName="definedIssue" required></textarea>
+            <mat-error *ngIf="(definedIssueValue?.errors || null)?.['required']">
+              Pole jest wymagane.
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div *ngIf="showPotentialCause" fxLayout="column" fxFlex.gt-sm="41%" fxFlex.sm="50%" fxFlex.xs="100%"
+          fxFlexOrder="3" fxFlexOrder.sm="3" fxFlexOrder.xs="3">
+          <mat-form-field appearance="fill">
+            <mat-label for="name">Potencjalna przyczyna wystąpnienia ryzyka</mat-label>
+            <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="5"
+              cdkAutosizeMaxRows="10" id="potentialCause" type="text" formControlName="potentialCause"
+              required></textarea>
+            <mat-error *ngIf="(potentialCauseValue?.errors || null)?.['required']">
+              Pole jest wymagane.
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="20px">
+        <div fxLayout="column" fxFlex.gt-sm="20%" fxFlex.sm="50%" fxFlex.xs="100%" fxFlexOrder="1" fxFlexOrder.sm="1"
+          fxFlexOrder.xs="1">
+          <mat-form-field appearance="fill" tabindex="1">
+            <mat-label>Stopień</mat-label>
+            <mat-select id="degree" type="text" formControlName="degree" name="degree" (selectionChange)="onChangeDegree($event)">
+              <mat-option *ngFor="let number of numbers" [value]="number">
+                {{ number }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="column" fxFlex.gt-sm="20%" fxFlex.sm="50%" fxFlex.xs="100%" fxFlexOrder="1" fxFlexOrder.sm="1"
+          fxFlexOrder.xs="1">
+          <mat-form-field appearance="fill" tabindex="1">
+            <mat-label>Występowalność</mat-label>
+            <mat-select id="occurrence" type="text" formControlName="occurrence" name="occurrence" (selectionChange)="onChangeOccurrence($event)">
+              <mat-option *ngFor="let item of numbers" [value]="item">
+                {{ item }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <p id="first-result">Ocena: {{ firstResult }}</p>
+      <div>
+        <button mat-button matStepperNext (click)="stepFirstFinish()">Następny</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Działania</ng-template>
+
+      <div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="20px">
+        <div fxLayout="column" fxFlex.gt-sm="50%" fxFlex.sm="50%" fxFlex.xs="100%" fxFlexOrder="2" fxFlexOrder.sm="2"
+          fxFlexOrder.xs="2">
+          <mat-form-field appearance="fill">
+            <mat-label for="name">Systemowe działanie zapobiegawcze (R) lub doskonalące (S)</mat-label>
+            <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="5"
+              cdkAutosizeMaxRows="10" id="preventiveAction" type="text" formControlName="preventiveAction"
+              required></textarea>
+            <mat-error *ngIf="(preventiveActionValue?.errors || null)?.['required']">
+              Pole jest wymagane.
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="20px">
+        <div fxLayout="column" fxFlex.gt-sm="50%" fxFlex.sm="50%" fxFlex.xs="100%" fxFlexOrder="2" fxFlexOrder.sm="2"
+          fxFlexOrder.xs="2">
+          <mat-form-field appearance="fill">
+            <mat-label for="name">Osoba odpowiedzialna za wdrożenie działania systemowego</mat-label>
+            <input matInput id="personForSystemImplementation" type="text"
+              formControlName="personForSystemImplementation">
+            <mat-error *ngIf="(personForSystemImplementationValue?.errors || null)?.['required']">
+              Pole jest wymagane.
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="20px">
+        <div fxLayout="column" fxFlex.gt-sm="20%" fxFlex.sm="20%" fxFlex.xs="100%" fxFlexOrder="2" fxFlexOrder.sm="2"
+          fxFlexOrder.xs="2">
+          <mat-form-field appearance="fill" tabindex="4">
+            <mat-label>Planowana data wdrożenia działania systemowego</mat-label>
+            <input matInput [matDatepicker]="picker1" formControlName="plannedSystemImplementationDate">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="column" fxFlex.gt-sm="20%" fxFlex.sm="20%" fxFlex.xs="100%" fxFlexOrder="2" fxFlexOrder.sm="2"
+          fxFlexOrder.xs="2">
+          <mat-form-field appearance="fill" tabindex="4">
+            <mat-label>Rzeczywista data wdrożenia działania systemowego</mat-label>
+            <input matInput [matDatepicker]="picker2" formControlName="realSystemImplementationDate">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="20px">
+        <div fxLayout="column" fxFlex.gt-sm="50%" fxFlex.sm="50%" fxFlex.xs="100%" fxFlexOrder="2" fxFlexOrder.sm="2"
+          fxFlexOrder.xs="2">
+          <mat-form-field appearance="fill">
+            <mat-label for="name">Status realizacji działania systemowego</mat-label>
+            <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="5"
+              cdkAutosizeMaxRows="10" id="implementationStatus" type="text" formControlName="implementationStatus"
+              required></textarea>
+            <mat-error *ngIf="(implementationStatusValue?.errors || null)?.['required']">
+              Pole jest wymagane.
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="column" fxFlex.gt-sm="50%" fxFlex.sm="50%" fxFlex.xs="100%" fxFlexOrder="2" fxFlexOrder.sm="2"
+          fxFlexOrder.xs="2">
+          <mat-form-field appearance="fill">
+            <mat-label for="name">Ocena skuteczności działania systemowego</mat-label>
+            <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="5"
+              cdkAutosizeMaxRows="10" id="systemPerformance" type="text" formControlName="systemPerformance"
+              required></textarea>
+            <mat-error *ngIf="(systemPerformanceValue?.errors || null)?.['required']">
+              Pole jest wymagane.
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="20px">
+        <div fxLayout="column" fxFlex.gt-sm="20%" fxFlex.sm="50%" fxFlex.xs="100%" fxFlexOrder="2" fxFlexOrder.sm="2"
+          fxFlexOrder.xs="2">
+          <mat-form-field appearance="fill" tabindex="4">
+            <mat-label>Data oceny skuteczności działania systemowego</mat-label>
+            <input matInput [matDatepicker]="picker3" formControlName="dateEffectivenessOfSystemOperation">
+            <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+            <mat-datepicker #picker3></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="20px">
+        <div fxLayout="column" fxFlex.gt-sm="20%" fxFlex.sm="50%" fxFlex.xs="100%" fxFlexOrder="1" fxFlexOrder.sm="1"
+          fxFlexOrder.xs="1">
+          <mat-form-field appearance="fill" tabindex="1">
+            <mat-label>Stopień</mat-label>
+            <mat-select id="degreeAction" type="text" formControlName="degreeAction" name="degreeAction" (selectionChange)="onChangeDegreeAction($event)">
+              <mat-option *ngFor="let number of numbers" [value]="number">
+                {{ number }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="column" fxFlex.gt-sm="20%" fxFlex.sm="50%" fxFlex.xs="100%" fxFlexOrder="1" fxFlexOrder.sm="1"
+          fxFlexOrder.xs="1">
+          <mat-form-field appearance="fill" tabindex="1">
+            <mat-label>Występowalność</mat-label>
+            <mat-select id="occurrenceAction" type="text" formControlName="occurrenceAction" name="occurrenceAction" (selectionChange)="onChangeOccurrenceAction($event)">
+              <mat-option *ngFor="let item of numbers" [value]="item">
+                {{ item }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <p id="second-result">Ocena: {{ secondResult }}</p>
+
+      <div>
+        <button mat-button matStepperPrevious>Powrót</button>
+        <button mat-button matStepperNext (click)="stepSecondFinish()">Następny</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="thirdFormGroup">
+    <form [formGroup]="thirdFormGroup">
+      <ng-template matStepLabel>Koniec</ng-template>
+
+      <div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="20px">
+        <div fxLayout="column" fxFlex.gt-sm="50%" fxFlex.sm="50%" fxFlex.xs="100%" fxFlexOrder="2" fxFlexOrder.sm="2"
+          fxFlexOrder.xs="2">
+          <mat-form-field appearance="fill">
+            <mat-label for="name">Plan awaryjny (tylko dla ryzyka ze stopniem 4)</mat-label>
+            <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="5"
+              cdkAutosizeMaxRows="10" id="emergencyPlan" type="text" formControlName="emergencyPlan"
+              required></textarea>
+            <mat-error *ngIf="(emergencyPlanValue?.errors || null)?.['required']">
+              Pole jest wymagane.
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="20px">
+        <div fxLayout="column" fxFlex.gt-sm="50%" fxFlex.sm="50%" fxFlex.xs="100%" fxFlexOrder="2" fxFlexOrder.sm="2"
+          fxFlexOrder.xs="2">
+          <mat-form-field appearance="fill">
+            <mat-label for="name">Osoba odpowiedzialna za realizacje planów awaryjnych</mat-label>
+            <input matInput id="personForEmergencyPlan" type="text" formControlName="personForEmergencyPlan">
+            <mat-error *ngIf="(personForEmergencyPlanValue?.errors || null)?.['required']">
+              Pole jest wymagane.
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="20px">
+        <div fxLayout="column" fxFlex.gt-sm="50%" fxFlex.sm="50%" fxFlex.xs="100%" fxFlexOrder="2" fxFlexOrder.sm="2"
+          fxFlexOrder.xs="2">
+          <mat-form-field appearance="fill">
+            <mat-label for="name">Ocena skuteczności / weryfikacja</mat-label>
+            <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="5"
+              cdkAutosizeMaxRows="10" id="assessmentOfVerificationEffectiveness" type="text"
+              formControlName="assessmentOfVerificationEffectiveness" required></textarea>
+            <mat-error *ngIf="(assessmentOfVerificationEffectivenessValue?.errors || null)?.['required']">
+              Pole jest wymagane.
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+    </form>
+    <div>
+      <button mat-button matStepperPrevious>Powrót</button>
+      <button mat-button matStepperNext (click)="stepThirdFinish()">Zapisz</button>
+    </div>
+  </mat-step>
+</mat-vertical-stepper>

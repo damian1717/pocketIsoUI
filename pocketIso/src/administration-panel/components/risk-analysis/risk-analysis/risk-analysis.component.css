@@ -1,0 +1,20 @@
+.risk-low, .chance-high {
+    background-color:#90d19d;
+    width: 90px;
+    padding: 5px;
+    color:black;
+}
+
+.risk-medium, .chance-medium {
+    background-color: #cfc95b;
+    width: 90px;
+    padding: 5px;
+    color:black;
+}
+
+.risk-high, .chance-low {
+    background-color: #faa0a7;
+    width: 90px;
+    padding: 5px;
+    color:black;
+}

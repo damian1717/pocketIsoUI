@@ -51,10 +51,13 @@ import { AddOrganizationalContextComponent } from '../administration-panel/compo
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AddDeviceComponent } from '../administration-panel/components/devices/add-device/add-device.component';
 import { DevicesComponent } from '../administration-panel/components/devices/devices/devices.component';
-
 import localePl from '@angular/common/locales/pl';
 import localePlExtra from '@angular/common/locales/extra/pl';
-import { registerLocaleData, DecimalPipe, CurrencyPipe} from '@angular/common';
+import { registerLocaleData } from '@angular/common';
+import { RiskAnalysisComponent } from '../administration-panel/components/risk-analysis/risk-analysis/risk-analysis.component';
+import { RiskLegendDialogComponent } from '../administration-panel/components/risk-analysis/risk-legend-dialog/risk-legend-dialog.component';
+import { RiskCriteriaDialogComponent } from '../administration-panel/components/risk-analysis/risk-criteria-dialog/risk-criteria-dialog.component';
+
 registerLocaleData(localePl, 'pl-PL', localePlExtra);
 
 @NgModule({
@@ -99,7 +102,10 @@ registerLocaleData(localePl, 'pl-PL', localePlExtra);
     AddSubProcessComponent,
     AddOrganizationalContextComponent,
     AddDeviceComponent,
-    DevicesComponent
+    DevicesComponent,
+    RiskAnalysisComponent,
+    RiskLegendDialogComponent,
+    RiskCriteriaDialogComponent
   ],
   imports: [
     BrowserModule,

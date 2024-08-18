@@ -21,6 +21,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { DateAdapter, MatNativeDateModule, NativeDateAdapter } from '@angular/material/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatRadioModule } from '@angular/material/radio';
+import {MatStepperModule} from '@angular/material/stepper';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   exports: [
@@ -44,7 +46,9 @@ import { MatRadioModule } from '@angular/material/radio';
     MatMenuModule,
     MatButtonToggleModule,
     MatTooltipModule,
-    MatRadioModule
+    MatRadioModule,
+    MatStepperModule,
+    MatFormFieldModule
   ],
   imports: [
     MatGridListModule,
