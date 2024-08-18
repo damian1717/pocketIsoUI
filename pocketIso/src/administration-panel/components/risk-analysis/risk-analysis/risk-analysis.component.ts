@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -9,6 +9,7 @@ import { RiskAnalysisService } from '../../../../administration-panel/services/r
 import { RiskLegendDialogComponent } from '../risk-legend-dialog/risk-legend-dialog.component';
 import { RiskAnalysis } from '../../../../administration-panel/models/risk-analysis.model';
 import { RiskCriteriaDialogComponent } from '../risk-criteria-dialog/risk-criteria-dialog.component';
+import { MatStepper } from '@angular/material/stepper';
 
 @Component({
   selector: 'app-risk-analysis',
@@ -16,6 +17,8 @@ import { RiskCriteriaDialogComponent } from '../risk-criteria-dialog/risk-criter
   styleUrls: ['./risk-analysis.component.css']
 })
 export class RiskAnalysisComponent implements OnInit, AfterViewInit {
+
+  @ViewChild("stepper", { static: false }) stepper: MatStepper | undefined;
 
   processId = '';
   processName = '';
@@ -206,12 +209,20 @@ export class RiskAnalysisComponent implements OnInit, AfterViewInit {
       model.processId = this.processId ? this.processId : '';
       model.ownerOfProcess = this.ownerOfProcess;
       if (this.riskId) {
-        this.update();
+        this.update(this.firstResult < 3 ? 'Dane zaktualizowane. Ocena musi być powyzej 2 punktów, żeby przejść do działań.' : '');
       } else {
         this.riskAnalysisService.addRiskAnalysis(model).subscribe(x => {
-          this.displayMessage('Dane wypełnione.');
+          this.displayMessage(this.firstResult < 3 ? 'Dane wypełnione. Ocena musi być powyzej 2 punktów, żeby przejść do działań.' : 'Dane wypełnione.');
           this.riskId = x;
         });
+      }
+
+      if (this.firstResult < 3) {
+        return;
+      }
+
+      if (this.stepper) {
+        this.stepper.next();
       }
     }
   }
@@ -228,7 +239,7 @@ export class RiskAnalysisComponent implements OnInit, AfterViewInit {
     }
   }
 
-  private update() {
+  private update(message: string = '') {
     let model = this.firstFormGroup.value as RiskAnalysis;
     model.processId = this.processId ? this.processId : '';
     model.ownerOfProcess = this.ownerOfProcess;
@@ -251,7 +262,7 @@ export class RiskAnalysisComponent implements OnInit, AfterViewInit {
     model.assessmentOfVerificationEffectiveness = thirdModel.assessmentOfVerificationEffectiveness;
 
     this.riskAnalysisService.updateRiskAnalysis(model).subscribe(x => {
-      this.displayMessage('Dane zaktualizowane.');
+      this.displayMessage(message ? message : 'Dane zaktualizowane.');
     });
   }
 
