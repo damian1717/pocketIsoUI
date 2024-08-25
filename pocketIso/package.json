@@ -24,6 +24,7 @@
     "@kolkov/angular-editor": "^3.0.0-beta.0",
     "angular-font-awesome": "^3.1.2",
     "file-saver": "^2.0.5",
+    "guid-typescript": "^1.0.9",
     "primeicons": "^6.0.1",
     "primeng": "^17.3.1",
     "rxjs": "~7.8.0",

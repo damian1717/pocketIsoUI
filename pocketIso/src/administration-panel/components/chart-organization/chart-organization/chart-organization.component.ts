@@ -9,6 +9,8 @@ import { RaportService } from '../../../../common/services/raport.service';
 import { DocumentInfo } from '../../../../common/models/documnet.model';
 import { RaportCode } from '../../../../common/enums/raport-codes';
 import { ChartOrgReport } from '../../../../common/models/chart-org-report.model';
+import { Router } from '@angular/router';
+import { CompanyService } from '../../../../administration-panel/services/company.service';
 
 @Component({
     selector: 'app-chart-organization',
@@ -21,13 +23,21 @@ export class ChartOrganizationComponent implements OnInit {
     data: TreeNode[] = [];
     listOfPersons: OrganizationChartPersonInfo[] = [];
     documents: DocumentInfo[] = [];
-
+    companyId = '';
     constructor(private organizationChartService: OrganizationChartService, private snackBar: MatSnackBar,
-        private documentService: DocumentService, private saveAsService: SaveAsService, private raport: RaportService) { }
+        private documentService: DocumentService, private saveAsService: SaveAsService, private raport: RaportService,
+        private router: Router, private companyService: CompanyService) { }
 
     ngOnInit() {
+        this.getCompanyId();
         this.buildChart();
         this.getDocuments();
+    }
+
+    getCompanyId() {
+        this.companyService.getCurrentCompanyId().subscribe(x => {
+            this.companyId = x;
+        })
     }
 
     buildChart() {
@@ -168,5 +178,9 @@ export class ChartOrganizationComponent implements OnInit {
                 this.getDocuments();
                 this.displayMessage('Raport utworzony');
             })
+    }
+
+    redirectToRiskAnalysis() {
+        this.router.navigateByUrl(`risk-analysis-list/company/${this.companyId}`);
     }
 }

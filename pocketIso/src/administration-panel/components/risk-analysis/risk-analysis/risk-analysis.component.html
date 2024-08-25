@@ -31,10 +31,10 @@
           fxFlexOrder.xs="1">
           <mat-form-field appearance="fill" tabindex="1">
             <mat-label>Rodzaj</mat-label>
-            <mat-select id="processType" type="text" formControlName="processType" name="processType"
+            <mat-select id="riskType" type="text" formControlName="riskType" name="riskType"
               (selectionChange)="onChangeProcesType($event)">
-              <mat-option *ngFor="let process of processTypes" [value]="process.value">
-                {{process.name}}
+              <mat-option *ngFor="let risks of riskTypes" [value]="risks.value">
+                {{risks.name}}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -284,3 +284,7 @@
     </div>
   </mat-step>
 </mat-vertical-stepper>
+
+<div fxLayout="row" fxLayoutAlign="center center">
+  <button mat-raised-button (click)="goToList()" type="button" style="margin-top: 20px;">Lista</button>
+</div>

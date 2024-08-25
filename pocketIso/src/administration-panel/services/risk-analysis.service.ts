@@ -18,8 +18,8 @@ export class RiskAnalysisService extends BaseApiService {
     return this.getAsync<RiskAnalysis>(`riskanalysis/getriskanalys/${id}`);
   }
 
-  public getRiskAnalysByProcessId(processId: string): Observable<RiskAnalysis> {
-    return this.getAsync<RiskAnalysis>(`riskanalysis/getriskanalysbyprocessid/${processId}`);
+  public getRiskAnalysisByProcessIdAndType(processId: string, type: number): Observable<RiskAnalysis[]> {
+    return this.getAsync<RiskAnalysis[]>(`riskanalysis/getriskanalysbyprocessidandtype/${type}/${processId}`);
   }
 
   public addRiskAnalysis(risk: RiskAnalysis): Observable<string> {

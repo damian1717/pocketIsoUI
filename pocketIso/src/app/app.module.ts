@@ -57,6 +57,7 @@ import { registerLocaleData } from '@angular/common';
 import { RiskAnalysisComponent } from '../administration-panel/components/risk-analysis/risk-analysis/risk-analysis.component';
 import { RiskLegendDialogComponent } from '../administration-panel/components/risk-analysis/risk-legend-dialog/risk-legend-dialog.component';
 import { RiskCriteriaDialogComponent } from '../administration-panel/components/risk-analysis/risk-criteria-dialog/risk-criteria-dialog.component';
+import { RiskAnalysisListComponent } from '../administration-panel/components/risk-analysis/risk-analysis-list/risk-analysis-list.component';
 
 registerLocaleData(localePl, 'pl-PL', localePlExtra);
 
@@ -105,7 +106,8 @@ registerLocaleData(localePl, 'pl-PL', localePlExtra);
     DevicesComponent,
     RiskAnalysisComponent,
     RiskLegendDialogComponent,
-    RiskCriteriaDialogComponent
+    RiskCriteriaDialogComponent,
+    RiskAnalysisListComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,153 @@
+<div>
+  <button mat-raised-button color="primary" style="margin-bottom: 20px;" (click)="add()">Dodaj ryzyko / szanse</button>
+</div>
+
+<div style="padding-bottom: 20px;">
+  <button mat-raised-button color="primary" (click)="openLegend()">Legenda</button>
+  <button mat-raised-button color="primary" style="margin-left: 20px;" (click)="openCriteria()">Kryteria Oceny</button>
+</div>
+
+<section class="example-container mat-elevation-z8" tabindex="0">
+  <table mat-table [dataSource]="dataSource">
+
+    <ng-container matColumnDef="riskType" sticky>
+      <th mat-header-cell *matHeaderCellDef>R / S</th>
+      <td mat-cell *matCellDef="let element"  [ngStyle]="{'background-color': element.riskType === 1 ? '#faa0a7' : '#90d19d' }">
+        <div class="base-cell" *ngIf="element.riskType === 1">Ryzyko</div>
+        <div class="base-cell" *ngIf="element.riskType === 2">Szansa</div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="ownerOfProcess">
+      <th mat-header-cell *matHeaderCellDef class="mid-width-class">Właściciel processu</th>
+      <td mat-cell *matCellDef="let element" class="mid-width-class"> {{ element.ownerOfProcess }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="definedIssue">
+      <th mat-header-cell *matHeaderCellDef class="width-class">Zdefiniowane ryzyko</th>
+      <td mat-cell *matCellDef="let element" class="width-class"> {{ element.definedIssue }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="potentialCause">
+      <th mat-header-cell *matHeaderCellDef class="width-class">Potencjalna przyczyna</th>
+      <td mat-cell *matCellDef="let element" class="width-class"> {{ element.potentialCause }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="degree">
+      <th mat-header-cell *matHeaderCellDef class="mid-width-class">Stopień ryzyka</th>
+      <td mat-cell *matCellDef="let element" class="mid-width-class"> {{ element.degree }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="occurrence">
+      <th mat-header-cell *matHeaderCellDef>Występowalność</th>
+      <td mat-cell *matCellDef="let element"> {{ element.occurrence }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="rate">
+      <th mat-header-cell *matHeaderCellDef>Ocena</th>
+      <td mat-cell *matCellDef="let element" [ngClass]="element.rateClass"> {{ element.rate }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="preventiveAction">
+      <th mat-header-cell *matHeaderCellDef class="width-class">Systemowe działanie zapobiegawcze (R) lub doskonalące (S)</th>
+      <td mat-cell *matCellDef="let element" class="width-class"> {{ element.preventiveAction }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="personForSystemImplementation">
+      <th mat-header-cell *matHeaderCellDef class="width-class">Osoba odpowiedzialna za wdrożenie działania systemowego</th>
+      <td mat-cell *matCellDef="let element" class="width-class"> {{ element.personForSystemImplementation }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="plannedSystemImplementationDate">
+      <th mat-header-cell *matHeaderCellDef  class="mid-width-class">Planowana data wdrożenia działania systemowego</th>
+      <td mat-cell *matCellDef="let element"  class="mid-width-class"> {{ element.plannedSystemImplementationDate | date }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="realSystemImplementationDate">
+      <th mat-header-cell *matHeaderCellDef  class="mid-width-class">Rzeczywista data wdrożenia działania systemowego</th>
+      <td mat-cell *matCellDef="let element"  class="mid-width-class"> {{ element.realSystemImplementationDate | date }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="implementationStatus">
+      <th mat-header-cell *matHeaderCellDef class="width-class">Status realizacji działania systemowego</th>
+      <td mat-cell *matCellDef="let element" class="width-class"> {{ element.implementationStatus }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="systemPerformance">
+      <th mat-header-cell *matHeaderCellDef class="width-class">Ocena skuteczności działania systemowego</th>
+      <td mat-cell *matCellDef="let element" class="width-class"> {{ element.systemPerformance }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="dateEffectivenessOfSystemOperation">
+      <th mat-header-cell *matHeaderCellDef  class="mid-width-class">Data oceny skuteczności działania systemowego</th>
+      <td mat-cell *matCellDef="let element"  class="mid-width-class"> {{ element.dateEffectivenessOfSystemOperation | date }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="degreeAction">
+      <th mat-header-cell *matHeaderCellDef>Stopień</th>
+      <td mat-cell *matCellDef="let element"> {{ element.degreeAction }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="occurrenceAction">
+      <th mat-header-cell *matHeaderCellDef>Występowalność</th>
+      <td mat-cell *matCellDef="let element"> {{ element.occurrenceAction }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="rate2">
+      <th mat-header-cell *matHeaderCellDef>Ocena</th>
+      <td mat-cell *matCellDef="let element" [ngClass]="element.rate2Class"> {{ element.rate2 }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="emergencyPlan">
+      <th mat-header-cell *matHeaderCellDef class="width-class">Plan awaryjny</th>
+      <td mat-cell *matCellDef="let element" class="width-class"> {{ element.emergencyPlan }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="personForEmergencyPlan">
+      <th mat-header-cell *matHeaderCellDef  class="mid-width-class">Odpowiedzialny za realizację planów awaryjnych</th>
+      <td mat-cell *matCellDef="let element"  class="mid-width-class"> {{ element.personForEmergencyPlan }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="assessmentOfVerificationEffectiveness">
+      <th mat-header-cell *matHeaderCellDef>Ocena skuteczności weryfikacji</th>
+      <td mat-cell *matCellDef="let element"> {{ element.assessmentOfVerificationEffectiveness }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="changedFields">
+      <th mat-header-cell *matHeaderCellDef class="width-class">Ostatnio zmienione pola</th>
+      <td mat-cell *matCellDef="let element" class="width-class"> {{ element.changedFields }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="modifiedBy">
+      <th mat-header-cell *matHeaderCellDef>Zaktualizowane przez</th>
+      <td mat-cell *matCellDef="let element"> {{ element.modifiedBy }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="modifiedDate">
+      <th mat-header-cell *matHeaderCellDef>Data zaktualizowania</th>
+      <td mat-cell *matCellDef="let element"> {{ element.modifiedDate | date}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="version">
+      <th mat-header-cell *matHeaderCellDef>Wersja</th>
+      <td mat-cell *matCellDef="let element"> {{ element.version }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef> Edycja </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-raised-button color="primary" (click)="redirectToEdit(element.id)">Edycja</button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef> Usuń </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-raised-button color="primary" (click)="delete(element.id)">Usuń</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</section>

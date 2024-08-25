@@ -10,6 +10,8 @@ import { RiskLegendDialogComponent } from '../risk-legend-dialog/risk-legend-dia
 import { RiskAnalysis } from '../../../../administration-panel/models/risk-analysis.model';
 import { RiskCriteriaDialogComponent } from '../risk-criteria-dialog/risk-criteria-dialog.component';
 import { MatStepper } from '@angular/material/stepper';
+import { AnalysCodes } from 'src/common/enums/analys-codes';
+import { Guid } from 'guid-typescript';
 
 @Component({
   selector: 'app-risk-analysis',
@@ -22,16 +24,18 @@ export class RiskAnalysisComponent implements OnInit, AfterViewInit {
 
   processId = '';
   processName = '';
+  analysType = '';
   ownerOfProcess = '';
   riskId: string | null = '';
   selectedIndex: number = 0;
-  processTypes: Category[] | undefined;
+  riskTypes: Category[] | undefined;
   numbers: number[] = [];
   firstResult = 0;
   secondResult = 0;
+  currentUpdateId = '';
 
   firstFormGroup: FormGroup = this._formBuilder.group({
-    processType: [1, Validators.required],
+    riskType: [1, Validators.required],
     definedIssue: ['', Validators.required],
     potentialCause: ['', Validators.required],
     degree: [1],
@@ -75,37 +79,42 @@ export class RiskAnalysisComponent implements OnInit, AfterViewInit {
   text = 'szansa';
   teks2 = 'zapobiegawcze'
   showPotentialCause = false;
-  processTypeValue = this.firstFormGroup.get('processType');
+  riskTypeValue = this.firstFormGroup.get('riskType');
   constructor(private router: Router, private route: ActivatedRoute,
     private processService: ProcessService, private _formBuilder: FormBuilder, public dialog: MatDialog,
     private riskAnalysisService: RiskAnalysisService, private snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
+    this.currentUpdateId = Guid.create().toString();
     this.processId = this.route.snapshot.paramMap.get('processId')!;
+    this.analysType = this.route.snapshot.paramMap.get('type')!;
+    this.riskId = this.route.snapshot.paramMap.get('id')!;
     this.getProcess();
-    this.getRiskAnalys(this.processId);
-    this.getProcessTypes();
+    if (this.riskId) {
+      this.getRiskAnalys(this.riskId);
+    }
+    this.getRiskTypes();
     this.getNumbers();
 
-    this.setProcesTypeText(this.processTypeValue?.value);
+    this.setProcesTypeText(this.riskTypeValue?.value);
   }
 
   ngAfterViewInit() {
-    this.setClassForResult(this.processTypeValue?.value, 'first-result');
-    this.setClassForResult(this.processTypeValue?.value, 'second-result');
+    this.setClassForResult(this.riskTypeValue?.value, 'first-result');
+    this.setClassForResult(this.riskTypeValue?.value, 'second-result');
   }
 
-  getRiskAnalys(processId: string) {
-    if (processId) {
-      this.riskAnalysisService.getRiskAnalysByProcessId(processId).subscribe(x => {
+  getRiskAnalys(riskId: string) {
+    if (riskId) {
+      this.riskAnalysisService.getRiskAnalys(riskId).subscribe(x => {
         if (x) {
           this.riskId = x.id;
           this.ownerOfProcess = x.ownerOfProcess;
 
           this.firstFormGroup.patchValue(
             {
-              processType: x.processType,
+              riskType: x.riskType,
               definedIssue: x.definedIssue,
               potentialCause: x.potentialCause,
               degree: x.degree,
@@ -135,7 +144,7 @@ export class RiskAnalysisComponent implements OnInit, AfterViewInit {
             }
           );
 
-          this.setProcesTypeText(this.processTypeValue?.value);
+          this.setProcesTypeText(this.riskTypeValue?.value);
           this.calculateResult();
           this.calculateSecendResult();
         }
@@ -208,6 +217,8 @@ export class RiskAnalysisComponent implements OnInit, AfterViewInit {
       let model = this.firstFormGroup.value as RiskAnalysis;
       model.processId = this.processId ? this.processId : '';
       model.ownerOfProcess = this.ownerOfProcess;
+      model.currentUpdateId = this.currentUpdateId;
+      model.type = this.analysType === 'process' ? AnalysCodes.Process : AnalysCodes.Company;
       if (this.riskId) {
         this.update(this.firstResult < 3 ? 'Dane zaktualizowane. Ocena musi być powyzej 2 punktów, żeby przejść do działań.' : '');
       } else {
@@ -242,6 +253,7 @@ export class RiskAnalysisComponent implements OnInit, AfterViewInit {
   private update(message: string = '') {
     let model = this.firstFormGroup.value as RiskAnalysis;
     model.processId = this.processId ? this.processId : '';
+    model.currentUpdateId = this.currentUpdateId;
     model.ownerOfProcess = this.ownerOfProcess;
     let secendModel = this.secondFormGroup.value as RiskAnalysis;
     model.id = this.riskId ? this.riskId : '';
@@ -266,8 +278,8 @@ export class RiskAnalysisComponent implements OnInit, AfterViewInit {
     });
   }
 
-  getProcessTypes() {
-    this.processTypes =
+  getRiskTypes() {
+    this.riskTypes =
       [
         { value: 1, name: 'Ryzyko' } as Category,
         { value: 2, name: 'Szansa' } as Category
@@ -290,22 +302,22 @@ export class RiskAnalysisComponent implements OnInit, AfterViewInit {
   }
 
   onChangeDegree(event: any) {
-    let typeValue = (this.firstFormGroup.get('processType')?.value ?? 0) as number;
+    let typeValue = (this.firstFormGroup.get('riskType')?.value ?? 0) as number;
     this.setClassForResult(typeValue, 'first-result');
   }
 
   onChangeOccurrence(event: any) {
-    let typeValue = (this.firstFormGroup.get('processType')?.value ?? 0) as number;
+    let typeValue = (this.firstFormGroup.get('riskType')?.value ?? 0) as number;
     this.setClassForResult(typeValue, 'first-result');
   }
 
   onChangeDegreeAction(event: any) {
-    let typeValue = (this.firstFormGroup.get('processType')?.value ?? 0) as number;
+    let typeValue = (this.firstFormGroup.get('riskType')?.value ?? 0) as number;
     this.setClassForResult(typeValue, 'second-result');
   }
 
   onChangeOccurrenceAction(event: any) {
-    let typeValue = (this.firstFormGroup.get('processType')?.value ?? 0) as number;
+    let typeValue = (this.firstFormGroup.get('riskType')?.value ?? 0) as number;
     this.setClassForResult(typeValue, 'second-result');
   }
 
@@ -333,5 +345,9 @@ export class RiskAnalysisComponent implements OnInit, AfterViewInit {
     let occurrence = (this.secondFormGroup.get('occurrenceAction')?.value ?? 0) as number;
 
     this.secondResult = degree * occurrence;
+  }
+
+  goToList() {
+    this.router.navigateByUrl(`risk-analysis-list/${this.analysType}/${this.processId}`);
   }
 }

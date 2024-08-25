@@ -101,7 +101,7 @@ export class ProcessesComponent implements OnInit {
   }
 
   redirectToRiskAnalysis(processId: string) {
-     this.router.navigateByUrl(`risk-analysis/${processId}`);
+     this.router.navigateByUrl(`risk-analysis-list/process/${processId}`);
   }
 
   private getDocuments() {

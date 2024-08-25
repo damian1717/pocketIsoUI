@@ -38,6 +38,7 @@ import { AddOrganizationalContextComponent } from '../administration-panel/compo
 import { DevicesComponent } from '../administration-panel/components/devices/devices/devices.component';
 import { AddDeviceComponent } from '../administration-panel/components/devices/add-device/add-device.component';
 import { RiskAnalysisComponent } from '../administration-panel/components/risk-analysis/risk-analysis/risk-analysis.component';
+import { RiskAnalysisListComponent } from 'src/administration-panel/components/risk-analysis/risk-analysis-list/risk-analysis-list.component';
 
 const routes: Routes = [
   {
@@ -236,12 +237,20 @@ const routes: Routes = [
           }
         },
         {
-          path: 'risk-analysis/:processId', component: RiskAnalysisComponent, canActivate: [AuthGuard], data: {
+          path: 'risk-analysis/:type/:processId', component: RiskAnalysisComponent, canActivate: [AuthGuard], data: {
             role: Role.Admin
           }
         },
-        
-
+        {
+          path: 'risk-analysis/:type/:processId/:id', component: RiskAnalysisComponent, canActivate: [AuthGuard], data: {
+            role: Role.Admin
+          }
+        },
+        {
+          path: 'risk-analysis-list/:type/:id', component: RiskAnalysisListComponent, canActivate: [AuthGuard], data: {
+            role: Role.Admin
+          }
+        },
       ]
   },
   {

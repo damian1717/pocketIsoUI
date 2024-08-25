@@ -1,0 +1,56 @@
+.example-container {
+    max-width: 100%;
+    min-height: 600px;
+    overflow: auto;
+}
+
+table {
+    width: 800px;
+}
+
+td.mat-column-star {
+    width: 20px;
+    padding-right: 8px;
+}
+
+th.mat-column-position,
+td.mat-column-position {
+    padding-left: 8px;
+}
+
+.mat-mdc-table-sticky-border-elem-right {
+    border-left: 1px solid #e0e0e0;
+}
+
+.mat-mdc-table-sticky-border-elem-left {
+    border-right: 1px solid #e0e0e0;
+}
+
+.base-cell {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.width-class {
+    min-width: 250px;
+}
+
+.mid-width-class {
+    min-width: 180px;
+}
+
+.risk-low, .chance-high {
+    background-color:#90d19d;
+}
+
+.risk-medium, .chance-medium {
+    background-color: #cfc95b;
+}
+
+.risk-high, .chance-low {
+    background-color: #faa0a7;
+}

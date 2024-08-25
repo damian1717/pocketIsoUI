@@ -22,6 +22,10 @@ export class CompanyService extends BaseApiService {
     return this.getAsync<Company>(`company/getcompany/${id}`);
   }
 
+  public getCurrentCompanyId(): Observable<string> {
+    return this.getAsync<string>(`company/getcurrentcompanyid`);
+  }
+
   public addCompany(company: Company): Observable<Company> {
     return this.postAsync<Company>(`company/addcompany`, company);
   }

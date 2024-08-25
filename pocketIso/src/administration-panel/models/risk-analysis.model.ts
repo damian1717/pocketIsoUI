@@ -1,7 +1,8 @@
 export interface RiskAnalysis {
     id: string;
     processId: string;
-    processType: number;
+    type: number;
+    riskType: number;
     definedIssue: string;
     potentialCause: string;
     degree: number;
@@ -19,5 +20,11 @@ export interface RiskAnalysis {
     personForEmergencyPlan: string;
     assessmentOfVerificationEffectiveness: string;
     ownerOfProcess: string;
+    changedFields: string;
+    rate: number;
+    rate2: number;
+    rateClass: string;
+    rate2Class: string;
+    currentUpdateId: string;
   }
   
