@@ -58,6 +58,10 @@ import { RiskAnalysisComponent } from '../administration-panel/components/risk-a
 import { RiskLegendDialogComponent } from '../administration-panel/components/risk-analysis/risk-legend-dialog/risk-legend-dialog.component';
 import { RiskCriteriaDialogComponent } from '../administration-panel/components/risk-analysis/risk-criteria-dialog/risk-criteria-dialog.component';
 import { RiskAnalysisListComponent } from '../administration-panel/components/risk-analysis/risk-analysis-list/risk-analysis-list.component';
+import { ComplaintsComponent } from '../administration-panel/components/complaint/complaints/complaints.component';
+import { AddComplaintComponent } from '../administration-panel/components/complaint/add-complaint/add-complaint.component';
+import { UploadFilesComponent } from '../common/components/upload-files/upload-files.component';
+import { FileUploadModule } from 'primeng/fileupload';
 
 registerLocaleData(localePl, 'pl-PL', localePlExtra);
 
@@ -107,7 +111,10 @@ registerLocaleData(localePl, 'pl-PL', localePlExtra);
     RiskAnalysisComponent,
     RiskLegendDialogComponent,
     RiskCriteriaDialogComponent,
-    RiskAnalysisListComponent
+    RiskAnalysisListComponent,
+    ComplaintsComponent,
+    AddComplaintComponent,
+    UploadFilesComponent
   ],
   imports: [
     BrowserModule,
@@ -120,7 +127,8 @@ registerLocaleData(localePl, 'pl-PL', localePlExtra);
     OrganizationChartModule,
     CommonModule,
     AngularEditorModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    FileUploadModule
   ],
   providers: [
     {

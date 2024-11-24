@@ -38,7 +38,9 @@ import { AddOrganizationalContextComponent } from '../administration-panel/compo
 import { DevicesComponent } from '../administration-panel/components/devices/devices/devices.component';
 import { AddDeviceComponent } from '../administration-panel/components/devices/add-device/add-device.component';
 import { RiskAnalysisComponent } from '../administration-panel/components/risk-analysis/risk-analysis/risk-analysis.component';
-import { RiskAnalysisListComponent } from 'src/administration-panel/components/risk-analysis/risk-analysis-list/risk-analysis-list.component';
+import { RiskAnalysisListComponent } from '../administration-panel/components/risk-analysis/risk-analysis-list/risk-analysis-list.component';
+import { ComplaintsComponent } from '../administration-panel/components/complaint/complaints/complaints.component';
+import { AddComplaintComponent } from '../administration-panel/components/complaint/add-complaint/add-complaint.component';
 
 const routes: Routes = [
   {
@@ -248,6 +250,21 @@ const routes: Routes = [
         },
         {
           path: 'risk-analysis-list/:type/:id', component: RiskAnalysisListComponent, canActivate: [AuthGuard], data: {
+            role: Role.Admin
+          }
+        },
+        {
+          path: 'complaints', component: ComplaintsComponent, canActivate: [AuthGuard], data: {
+            role: Role.Admin
+          }
+        },
+        {
+          path: 'add-complaint', component: AddComplaintComponent, canActivate: [AuthGuard], data: {
+            role: Role.Admin
+          }
+        },
+        {
+          path: 'add-complaint/:id', component: AddComplaintComponent, canActivate: [AuthGuard], data: {
             role: Role.Admin
           }
         },

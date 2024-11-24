@@ -116,6 +116,11 @@ export const NAV_DATA: NavItem[] = [
         url: 'devices',
         role: 'admin'
       },
+      {
+        name: 'REKLAMACJE',
+        url: 'complaints',
+        role: 'admin'
+      }
     ]
   },
   {

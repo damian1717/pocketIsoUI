@@ -29,4 +29,8 @@ export class DocumentService extends BaseApiService {
   public downloadPdfByCodeLastAdded(code: string): Observable<{ filename: string, body: Blob }> {
     return this.downloadFilePost(`document/DownloadPdfByCodeLastAdded?code=${code}`, null, {}, false);
   }
+
+  public delete(id: string): Observable<DocumentInfo> {
+    return this.deleteAsync<DocumentInfo>(`document/delete/${id}`);
+  }
 }
