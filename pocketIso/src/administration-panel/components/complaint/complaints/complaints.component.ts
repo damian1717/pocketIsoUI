@@ -7,6 +7,8 @@ import { Complaint } from '../../../../administration-panel/models/complaint.mod
 import { ComplaintService } from '../../../../administration-panel/services/complaint.service';
 import { ConfirmationDialogComponent } from '../../../../common/components/confirmation-dialog/confirmation-dialog.component';
 import { UploadFilesComponent } from '../../../../common/components/upload-files/upload-files.component';
+import { AuthService } from '../../../../common/auth/auth.service';
+import { Role } from '../../../../common/enums/user-role-codes';
 
 @Component({
   selector: 'app-complaints',
@@ -15,6 +17,7 @@ import { UploadFilesComponent } from '../../../../common/components/upload-files
 })
 export class ComplaintsComponent implements OnInit {
 
+  role = '';
   dateFrom: Date | null = null;
   dateTo: Date | null = null;
   displayedColumns = [
@@ -35,9 +38,39 @@ export class ComplaintsComponent implements OnInit {
   complaints: Complaint[] = [];
 
   complaintDataSource = new MatTableDataSource(this.complaints);
-  constructor(private router: Router, private complaintService: ComplaintService, private snackBar: MatSnackBar, public dialog: MatDialog) { }
+  constructor(private router: Router, private complaintService: ComplaintService, private snackBar: MatSnackBar, public dialog: MatDialog,
+    private authService: AuthService
+  ) { }
 
   ngOnInit() {
+    this.role = this.authService.getRole();
+
+    if (this.role === Role.SuperAdmin || this.role === Role.Admin) {
+      this.displayedColumns = ['type',
+        'status',
+        'client',
+        'date',
+        'deadline',
+        'product',
+        'responsiblePerson',
+        'fileNames',
+        'actions',
+        'addDocument',
+        'edit',
+        'delete'];
+    } else {
+      this.displayedColumns = ['type',
+        'status',
+        'client',
+        'date',
+        'deadline',
+        'product',
+        'responsiblePerson',
+        'fileNames',
+        'actions',
+        'addDocument'];
+    }
+
     this.getComplaints();
   }
 
@@ -90,8 +123,16 @@ export class ComplaintsComponent implements OnInit {
   }
 
   addDocument(id: string) {
-    const dialogRef = this.dialog.open(UploadFilesComponent, { data: id });
+    const dialogRef = this.dialog.open(UploadFilesComponent,
+      {
+        data:
+        {
+          id: id,
+          canEdit: this.role === Role.SuperAdmin || this.role === Role.Admin
 
+        }
+      });
+      
     dialogRef.afterClosed().subscribe(result => {
       this.getComplaints();
     });

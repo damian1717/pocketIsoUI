@@ -124,23 +124,13 @@ export const NAV_DATA: NavItem[] = [
     ]
   },
   {
+    name: 'KONTEKST ORGANIZACJI',
+    url: 'view-organizational-context/',
+    role: 'user'
+  },
+  {
     name: 'POLITYKA JAKOŚCI',
     url: 'display-quality-policies/',
-    role: 'user'
-  },
-  {
-    name: 'PROCESY W FIRMIE',
-    url: 'processes-to-display',
-    role: 'user'
-  },
-  {
-    name: 'KONTEKST ORGANIZACJI',
-    url: 'add-audit/',
-    role: 'user'
-  },
-  {
-    name: 'ZAPIS DANYCH (ARCHIWIZACJA)',
-    url: 'add-audit/',
     role: 'user'
   },
   {
@@ -154,6 +144,16 @@ export const NAV_DATA: NavItem[] = [
     role: 'user'
   },
   {
+    name: 'PROCESY W FIRMIE',
+    url: 'processes-to-display',
+    role: 'user'
+  },
+  {
+    name: 'SZKOLENIA - TABELA',
+    url: 'display-employee-trainings',
+    role: 'user'
+  },
+  {
     name: 'PROCEDURY SYSTEMOWE',
     url: 'sub-processes/1',
     role: 'user'
@@ -164,66 +164,8 @@ export const NAV_DATA: NavItem[] = [
     role: 'user'
   },
   {
-    name: 'PRZEGLĄD ZARZĄDZANIA',
-    url: 'add-audit/',
-    auditName: '',
-    role: 'user'
-  },
-  {
-    name: 'MACIERZ ORGANIZACJI',
-    url: 'add-audit/',
-    role: 'user'
-  },
-  {
-    name: 'PROCEDURY SYSTEMOWE',
-    url: 'add-audit/',
-    role: 'user'
-  },
-  {
-    name: 'ANALIZA RYZYKA I SZANS',
-    url: 'add-audit/',
-    role: 'user'
-  },
-  {
-    name: 'KALENDARZ AUDYTÓW',
-    url: '/calendar-audits',
-    role: 'user'
-  },
-  {
-    name: 'AUDYT PROCESU PRODUKCJI',
-    url: '/edit-audit/',
-    auditName: 'audyt procesu produkcji',
-    role: 'user'
-  },
-  {
-    name: 'AUDYT WYROBU GOTOWEGO',
-    url: '/edit-audit',
-    auditName: 'audyt wyrobu gotowego',
-    role: 'user'
-  },
-  {
-    name: 'DODAJ AUDYT',
-    url: 'add-audit/',
-    role: 'user'
-  },
-  {
-    name: 'IDENTYFIKACJA PRZYCZYN',
-    url: '/identification-of-causes',
-    role: 'user'
-  },
-  {
-    name: 'PLAN DZIAŁAŃ KORYGUJĄCYCH',
-    url: '/corrective-action-plan',
-    role: 'user'
-  },
-  {
-    name: 'RAPORTY',
-    url: '/reports',
-    role: 'user'
-  },
-  {
-    name: 'PYTANIA DO AUDYTU',
-    url: '/audit-questions',
+    name: 'REKLAMACJE',
+    url: 'complaints',
     role: 'user'
   }
 ];

@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>Dokumenty</h1>
 <div mat-dialog-content>
-  <div class="card flex justify-content-center">
+  <div *ngIf="canEdit"  class="card flex justify-content-center">
     <p-fileUpload name="demo[]" url="{{url}}" (onUpload)="onUpload($event)" [multiple]="true" chooseLabel="Wybierz plik"
       uploadLabel="Dodaj plik" cancelLabel="Usuń plik">
       <ng-template pTemplate="content">
@@ -19,7 +19,7 @@
       <mat-list-item *ngFor="let document of documents">
         <div matListItemTitle>{{document.name}}</div>
         <mat-icon matListItemIcon (click)="downloadDocumnet(document.id, document.name)">download</mat-icon>
-        <mat-icon matListItemIcon (click)="deleteDocument(document.id)">delete</mat-icon>
+        <mat-icon *ngIf="canEdit"  matListItemIcon (click)="deleteDocument(document.id)">delete</mat-icon>
       </mat-list-item>
     </mat-list>
   </div>

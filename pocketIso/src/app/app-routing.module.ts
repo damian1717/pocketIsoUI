@@ -41,6 +41,7 @@ import { RiskAnalysisComponent } from '../administration-panel/components/risk-a
 import { RiskAnalysisListComponent } from '../administration-panel/components/risk-analysis/risk-analysis-list/risk-analysis-list.component';
 import { ComplaintsComponent } from '../administration-panel/components/complaint/complaints/complaints.component';
 import { AddComplaintComponent } from '../administration-panel/components/complaint/add-complaint/add-complaint.component';
+import { DisplayOrganizationalContextComponent } from 'src/users-panel/display-organizational-context/display-organizational-context.component';
 
 const routes: Routes = [
   {
@@ -200,7 +201,7 @@ const routes: Routes = [
         },
         {
           path: 'display-employee-trainings', component: DisplayEmployeeTrainingsComponent, canActivate: [AuthGuard], data: {
-            role: Role.Admin
+            role: Role.User
           }
         },
         {
@@ -221,6 +222,11 @@ const routes: Routes = [
         {
           path: 'organizational-context', component: AddOrganizationalContextComponent, canActivate: [AuthGuard], data: {
             role: Role.Admin
+          }
+        },
+        {
+          path: 'view-organizational-context', component: DisplayOrganizationalContextComponent, canActivate: [AuthGuard], data: {
+            role: Role.User
           }
         },
         {
@@ -255,7 +261,7 @@ const routes: Routes = [
         },
         {
           path: 'complaints', component: ComplaintsComponent, canActivate: [AuthGuard], data: {
-            role: Role.Admin
+            role: Role.User
           }
         },
         {

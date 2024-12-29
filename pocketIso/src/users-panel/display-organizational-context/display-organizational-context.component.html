@@ -1,0 +1,12 @@
+<div class="main-content">
+
+  <p class="header-name">Kontekst Organizacji</p>
+
+  <div *ngIf="document" style="margin: auto; width: 50%; padding-top: 100px;">
+    <p>Raport Kontekst Organizacji:</p>
+    <div>
+      <div style="padding-right: 20px;">{{document.name}} <mat-icon
+          (click)="downloadDocumnet(document.id)">download</mat-icon></div>
+    </div>
+  </div>
+</div>

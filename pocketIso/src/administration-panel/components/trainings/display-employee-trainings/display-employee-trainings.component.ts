@@ -55,8 +55,6 @@ export class DisplayEmployeeTrainingsComponent {
               this.dataSource.push(obj1 as object);
 
             });
-
-            console.log(this.dataSource);
           }
         }
       });

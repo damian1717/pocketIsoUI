@@ -17,6 +17,7 @@ export class UploadFilesComponent implements OnInit {
   url = `https://localhost:7087/api/document/upload/COM_${this.data}`;
   documentCode = '';
   documents: DocumentInfo[] = [];
+  canEdit = true;
 
   constructor(
     public dialogRef: MatDialogRef<UploadFilesComponent>,
@@ -28,7 +29,8 @@ export class UploadFilesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.documentCode = `COM_${this.data}`;
+    this.documentCode = `COM_${this.data.id}`;
+    this.canEdit = this.data.canEdit;
     this.getDocuments();
   }
 

@@ -45,7 +45,7 @@ export class AuthComponent implements OnInit {
         errorMessage => {
           this.error = errorMessage;
           this.isLoading = false;
-          this.displayMessage(this.error);
+          this.displayMessage(this.error?.message);
         })
     } else {
       this.displayMessage("Dane nie poprawne. Sprawdź formularz.");
