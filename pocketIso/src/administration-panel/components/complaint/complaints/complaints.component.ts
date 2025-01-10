@@ -16,7 +16,7 @@ import { Role } from '../../../../common/enums/user-role-codes';
   styleUrls: ['./complaints.component.css']
 })
 export class ComplaintsComponent implements OnInit {
-
+  isAdmin = true;
   role = '';
   dateFrom: Date | null = null;
   dateTo: Date | null = null;
@@ -45,6 +45,7 @@ export class ComplaintsComponent implements OnInit {
   ngOnInit() {
     this.role = this.authService.getRole();
 
+    this.isAdmin = this.role === Role.SuperAdmin || this.role === Role.Admin;
     if (this.role === Role.SuperAdmin || this.role === Role.Admin) {
       this.displayedColumns = ['type',
         'status',
