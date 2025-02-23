@@ -1,0 +1,66 @@
+<div class="main-content">
+
+  <p class="header-name">Dodaj Audyt</p>
+
+  <form [formGroup]="auditForm" fxLayout="column" (ngSubmit)="onSubmit()">
+    <div fxLayout="column">
+
+      <input hidden matInput id="id" type="text" formControlName="id">
+
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <mat-form-field appearance="fill" tabindex="2">
+          <mat-label for="name">Nazwa</mat-label>
+          <input matInput id="name" type="text" formControlName="name" autocomplete="off">
+          <mat-error *ngIf="(nameValue?.errors || null)?.['required']">
+            Nazwa jest wymagana.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <mat-form-field appearance="fill" tabindex="3">
+          <mat-label for="type">Rodzaj</mat-label>
+          <input matInput id="type" type="text" formControlName="type" autocomplete="off">
+          <mat-error *ngIf="(typeValue?.errors || null)?.['required']">
+            Rodzaj jest wymagany.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <mat-form-field appearance="fill" tabindex="4">
+          <mat-label for="status">Status</mat-label>
+          <input matInput id="status" type="text" formControlName="status" autocomplete="off">
+          <mat-error *ngIf="(statusValue?.errors || null)?.['required']">
+            Status jest wymagany.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <mat-form-field appearance="fill" tabindex="5">
+          <mat-label for="auditor">Audytor</mat-label>
+          <input matInput id="auditor" type="text" formControlName="auditor" autocomplete="off">
+          <mat-error *ngIf="(auditorValue?.errors || null)?.['required']">
+            Audytor jest wymagany.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <mat-form-field appearance="fill" tabindex="6">
+          <mat-label>Data</mat-label>
+          <input matInput [matDatepicker]="picker1" formControlName="auditDate">
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <button mat-raised-button style="margin-right: 20px;" (click)="redirectToAudits()">Audyty</button>
+      <button mat-raised-button color="primary" type="submit" class="regulation">Zapisz</button>
+    </div>
+  </form>
+</div>

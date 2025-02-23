@@ -41,7 +41,9 @@ import { RiskAnalysisComponent } from '../administration-panel/components/risk-a
 import { RiskAnalysisListComponent } from '../administration-panel/components/risk-analysis/risk-analysis-list/risk-analysis-list.component';
 import { ComplaintsComponent } from '../administration-panel/components/complaint/complaints/complaints.component';
 import { AddComplaintComponent } from '../administration-panel/components/complaint/add-complaint/add-complaint.component';
-import { DisplayOrganizationalContextComponent } from 'src/users-panel/display-organizational-context/display-organizational-context.component';
+import { DisplayOrganizationalContextComponent } from '../users-panel/display-organizational-context/display-organizational-context.component';
+import { AuditsComponent } from '../administration-panel/components/audits/audits/audits.component';
+import { AddAuditComponent } from '../administration-panel/components/audits/add-audit/add-audit.component';
 
 const routes: Routes = [
   {
@@ -274,6 +276,22 @@ const routes: Routes = [
             role: Role.Admin
           }
         },
+        {
+          path: 'audits', component: AuditsComponent, canActivate: [AuthGuard], data: {
+            role: Role.User
+          }
+        },
+        {
+          path: 'add-audit', component: AddAuditComponent, canActivate: [AuthGuard], data: {
+            role: Role.Admin
+          }
+        },
+        {
+          path: 'add-audit/:id', component: AddAuditComponent, canActivate: [AuthGuard], data: {
+            role: Role.Admin
+          }
+        },
+        // 
       ]
   },
   {

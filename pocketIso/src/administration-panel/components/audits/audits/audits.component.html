@@ -1,0 +1,52 @@
+<div *ngIf="isAdmin">
+  <button mat-raised-button color="primary" style="margin-bottom: 20px;" (click)="add()">Dodaj Audyt</button>
+</div>
+
+<table mat-table [dataSource]="auditDataSource" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="type" sticky>
+    <th mat-header-cell *matHeaderCellDef> Rodzaj </th>
+    <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="name" sticky>
+    <th mat-header-cell *matHeaderCellDef> Nazwa </th>
+    <td mat-cell *matCellDef="let element">{{element.name}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef> Status </th>
+    <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="auditDate">
+    <th mat-header-cell *matHeaderCellDef> Data </th>
+    <td mat-cell *matCellDef="let element"> {{element.auditDate | date}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="auditor">
+    <th mat-header-cell *matHeaderCellDef> Audytor </th>
+    <td mat-cell *matCellDef="let element"> {{element.auditor }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="edit">
+    <th mat-header-cell *matHeaderCellDef> Edycja </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-raised-button color="primary" (click)="redirectToEdit(element.id)">Edycja</button>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="delete">
+    <th mat-header-cell *matHeaderCellDef> Usuń </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-raised-button color="primary" (click)="delete(element.id)">Usuń</button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" colspan="3">Nie ma danych dla wybranych filtrów.</td>
+  </tr>
+</table>

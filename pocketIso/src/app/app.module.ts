@@ -63,6 +63,8 @@ import { AddComplaintComponent } from '../administration-panel/components/compla
 import { UploadFilesComponent } from '../common/components/upload-files/upload-files.component';
 import { FileUploadModule } from 'primeng/fileupload';
 import { DisplayOrganizationalContextComponent } from '../users-panel/display-organizational-context/display-organizational-context.component';
+import { AuditsComponent } from '../administration-panel/components/audits/audits/audits.component';
+import { AddAuditComponent } from '../administration-panel/components/audits/add-audit/add-audit.component';
 
 registerLocaleData(localePl, 'pl-PL', localePlExtra);
 
@@ -116,7 +118,9 @@ registerLocaleData(localePl, 'pl-PL', localePlExtra);
     ComplaintsComponent,
     AddComplaintComponent,
     UploadFilesComponent,
-    DisplayOrganizationalContextComponent
+    DisplayOrganizationalContextComponent,
+    AuditsComponent,
+    AddAuditComponent
   ],
   imports: [
     BrowserModule,

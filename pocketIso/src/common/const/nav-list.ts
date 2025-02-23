@@ -120,6 +120,11 @@ export const NAV_DATA: NavItem[] = [
         name: 'REKLAMACJE',
         url: 'complaints',
         role: 'admin'
+      },
+      {
+        name: 'AUDYTY',
+        url: 'audits',
+        role: 'admin'
       }
     ]
   },
